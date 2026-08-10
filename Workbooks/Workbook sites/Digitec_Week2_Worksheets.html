@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 2 — Design Phase Digital Workbook</title>
+<link rel='icon' href='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCc+CjxjaXJjbGUgY3g9JzMyJyBjeT0nMzInIHI9JzMwJyBmaWxsPScjMWY2ZmViJy8+CjxwYXRoIGQ9J00xMiAzMmg0ME0zMiA0YzggOCAxMiAxOCAxMiAyOFM0MCA1MiAzMiA2MEMyNCA1MiAyMCA0MiAyMCAzMlMyNCAxMiAzMiA0ek0xNiAxOGM2IDMgMTYgNSAxNiA1czEwLTIgMTYtNU0xNiA0NmM2LTMgMTYtNSAxNi01czEwIDIgMTYgNScgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPSczJyBmaWxsPSdub25lJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9zdmc+'>
+<meta name='theme-color' content='#17324d'>
+<style>
+:root{
+  --ink:#17324d; --muted:#5c6f82; --line:#c9d6e2; --paper:#ffffff;
+  --blue:#1f6feb; --cyan:#2aa7c9; --purple:#7656d6; --green:#2e9d68;
+  --amber:#d9981e; --red:#c74a4a; --soft:#eef5fb;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#dfeaf4;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.toolbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 16px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);flex-wrap:wrap}
+.toolbar .left{font-size:13px;color:var(--muted);font-weight:bold;display:flex;flex-direction:column;gap:2px}
+.toolbar .left .save-note{font-size:10.5px;font-weight:normal;color:var(--muted)}
+.toolbar .right{display:flex;gap:8px;flex-wrap:wrap}
+.btn{appearance:none;border:0;border-radius:10px;background:#17324d;color:#fff;padding:9px 15px;
+  font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 3px 10px rgba(23,50,77,.18)}
+.btn:hover{background:#1f6feb}
+.btn-outline{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);background:#fff}
+.btn-add{background:var(--soft);color:var(--blue);border:1px dashed var(--blue);box-shadow:none;padding:6px 12px;font-size:12px}
+.btn-add:hover{background:#e2f0ff}
+.btn-add.active{background:var(--blue);color:#fff;border-style:solid}
+.wrap{width:min(880px,calc(100% - 24px));margin:20px auto}
+.sheet{background:var(--paper);border:1px solid #b7c7d5;border-radius:16px;box-shadow:0 12px 30px rgba(23,50,77,.15);
+  padding:26px 30px 22px;margin-bottom:22px}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;border-bottom:3px solid var(--blue);
+  padding-bottom:12px;margin-bottom:16px}
+.sheet-head h1{margin:0 0 4px;font-size:22px}
+.sheet-head p{margin:0;font-size:12px;color:var(--muted)}
+.sheet-badge{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:11px;
+  font-weight:bold;color:var(--blue);white-space:nowrap}
+.id-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.field{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+.field b,label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;font-weight:bold;margin-bottom:3px}
+input[type=text],textarea,select{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 9px;
+  font-size:13px;font-family:inherit;color:var(--ink)}
+textarea{min-height:56px;resize:vertical}
+.block{margin-bottom:16px}
+.block h2{font-size:14px;margin:0 0 8px;color:var(--ink)}
+.block .hint{font-size:11.5px;color:var(--muted);margin:-4px 0 8px}
+.std-note{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.freedom-note{background:#eef9f2;border-left:4px solid var(--green);border-radius:8px;padding:10px 14px;
+  font-size:12.5px;color:#1c5c3f;margin-bottom:14px}
+.freedom-note b{color:#164a32}
+.checklist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.checklist li{display:flex;gap:8px;align-items:center;font-size:13px}
+input.chk-input{appearance:none;-webkit-appearance:none;width:15px;height:15px;border:2px solid var(--ink);
+  border-radius:3px;flex:none;margin:0;cursor:pointer;position:relative}
+input.chk-input:checked{background:var(--green);border-color:var(--green)}
+input.chk-input:checked::after{content:'✓';position:absolute;top:-3px;left:1px;color:#fff;font-size:11px;font-weight:bold}
+.add-row-wrap{margin-top:8px}
+footer{padding:14px 4px 30px;color:var(--muted);font-size:11px;text-align:center}
+/* colour swatches */
+.swatch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.swatch{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;background:#fbfdff}
+.swatch input[type=color]{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;padding:2px;cursor:pointer}
+.swatch input[type=text]{margin-top:6px;text-align:center;font-size:11px}
+.swatch label{font-size:9.5px}
+/* mock-up workbook (shared engine with Week 1) */
+.wf-option{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px;background:#fbfdff}
+.wf-option-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.wf-option-head h2{margin:0;font-size:14px}
+.wf-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.wf-toolbar select{border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;font-family:inherit}
+.wf-frame{border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.wf-frame-bar{background:#e7edf3;border-bottom:2px solid var(--ink);padding:6px 10px;display:flex;align-items:center;gap:6px}
+.wf-frame-bar .dot{width:8px;height:8px;border-radius:50%;background:#c9d6e2}
+.wf-frame-bar input{border:0;background:#fff;border-radius:5px;flex:1;padding:3px 8px;font-size:11px;margin-left:6px}
+.wf-canvas-wrap{position:relative;min-height:220px;background:#fff}
+.wf-guide{position:absolute;inset:0;padding:8px;display:flex;flex-direction:column;gap:5px;opacity:.5;pointer-events:none}
+.wf-zone{border:1.5px dashed var(--muted);border-radius:5px;display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:bold;flex:1;text-align:center;padding:2px}
+.wf-row{display:flex;gap:5px}
+.wf-draw-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.wf-uploaded-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;display:none}
+.wf-empty-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);
+  font-size:11px;text-align:center;padding:20px;pointer-events:none}
+.wf-notes{margin-top:10px}
+.wf-remove-btn{background:#fff;border:1px solid var(--red);color:var(--red);border-radius:8px;padding:4px 9px;font-size:11px;cursor:pointer}
+/* asset log */
+.asset-card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px;background:#fbfdff}
+.asset-top{display:flex;gap:12px;align-items:flex-start}
+.asset-thumb-wrap{flex:none;width:76px;height:76px;border:2px dashed var(--line);border-radius:8px;position:relative;
+  overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.asset-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:none}
+.asset-thumb-hint{font-size:9px;color:var(--muted);text-align:center;padding:4px}
+.asset-fields{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.asset-fields .full{grid-column:1 / -1}
+.asset-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.asset-actions button{font-size:11px;padding:5px 9px}
+@media print{
+  @page{size:A4 portrait;margin:12mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toolbar,.no-print{display:none!important}
+  .wrap{width:100%;margin:0}
+  .sheet{box-shadow:none;border:1px solid #999;border-radius:0;page-break-after:always}
+  .sheet:last-of-type{page-break-after:auto}
+  .wf-option,.asset-card{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="left">
+    <span>Week 2 — Design Phase · Digital Workbook</span>
+    <span class="save-note" id="saveNote">Not saved yet</span>
+  </div>
+  <div class="right">
+    <button class="btn btn-outline" type="button" id="fillBtn">📘 Load Exemplar Answers</button>
+    <button class="btn btn-outline" type="button" id="saveBackupBtn">💾 Save Backup</button>
+    <button class="btn btn-outline" type="button" id="loadBackupBtn">📂 Load Backup</button>
+    <input type="file" id="backupFileInput" accept="application/json" style="display:none">
+    <button class="btn btn-outline" type="button" id="clearBtn">🧹 Clear All Fields</button>
+    <button class="btn" type="button" onclick="window.print()">🖨 Print all</button>
+  </div>
+</div>
+<div class="wrap">
+
+  <!-- PAGE 1: Colour & Typography Trial -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Colour &amp; Typography Trial</h1><p>Week 4 (Week 2 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: appropriate tools/techniques for the domain (AS92005 L1) · advanced techniques &amp; conventions in a digital media outcome (AS91893 L2) · design decisions justified by legibility/readability (AS91901 L3)</p></div>
+      <span class="sheet-badge">Worksheet 1 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="c_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="c_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="c_date"></div>
+    </div>
+
+    <div class="freedom-note">
+      <b>Use whatever tool helps you choose colours.</b> Coolors.co, Adobe Color, a colour wheel, or just picking hex codes you like — the tool doesn't matter. What matters is that your choices connect back to your stakeholder and audience from Week 1, and that text stays readable.
+    </div>
+
+    <div class="block">
+      <h2>Colour palette trial</h2>
+      <p class="hint">Pick at least four colours and name their role. Click each swatch to choose a colour, or type a hex code.</p>
+      <div class="swatch-grid" id="c_swatches">
+        <div class="swatch"><label>Primary</label><input type="color" data-field="c_sw1_color" value="#1f6feb"><input type="text" data-field="c_sw1_hex" placeholder="#1f6feb"></div>
+        <div class="swatch"><label>Secondary</label><input type="color" data-field="c_sw2_color" value="#2aa7c9"><input type="text" data-field="c_sw2_hex" placeholder="#2aa7c9"></div>
+        <div class="swatch"><label>Accent</label><input type="color" data-field="c_sw3_color" value="#d9981e"><input type="text" data-field="c_sw3_hex" placeholder="#d9981e"></div>
+        <div class="swatch"><label>Background</label><input type="color" data-field="c_sw4_color" value="#ffffff"><input type="text" data-field="c_sw4_hex" placeholder="#ffffff"></div>
+        <div class="swatch"><label>Text</label><input type="color" data-field="c_sw5_color" value="#17324d"><input type="text" data-field="c_sw5_hex" placeholder="#17324d"></div>
+      </div>
+      <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addSwatchBtn">+ Add colour</button></div>
+    </div>
+
+    <div class="block">
+      <h2>Contrast check</h2>
+      <p class="hint">Check your text/background pairs with a contrast checker (e.g. WebAIM Contrast Checker). Which combinations pass, and which don't?</p>
+      <textarea data-field="c_contrast_notes"></textarea>
+    </div>
+
+    <div class="block">
+      <h2>Typography trial</h2>
+      <div class="id-row" style="grid-template-columns:1fr 1fr">
+        <div class="field"><b>Heading font</b><input type="text" data-field="c_heading_font" placeholder="e.g. Poppins"></div>
+        <div class="field"><b>Body font</b><input type="text" data-field="c_body_font" placeholder="e.g. Open Sans"></div>
+      </div>
+      <p class="hint" style="margin-top:10px">Why these fonts, and why this pairing? Think about tone, legibility on screen, and whether they're freely licensed for web use.</p>
+      <textarea data-field="c_font_rationale"></textarea>
+    </div>
+  </section>
+
+  <!-- PAGE 2: Mock-up Workbook -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Visual Mock-up Workbook</h1><p>Week 4 (Week 2 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: design communicated via mock-ups (AS92007 L1) · trialling multiple options and selecting the most suitable (AS91897 L2 Merit) · UX methodologies and modelling (AS91901 L3)</p></div>
+      <span class="sheet-badge">Worksheet 2 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="m_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="m_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="m_date"></div>
+    </div>
+
+    <div class="freedom-note">
+      <b>These are blank screens, not a template to fill in.</b> Now that you've trialled colours and fonts on Worksheet 1, sketch, draw, or upload a mock-up that actually uses them — by hand and photographed, in Figma/Canva/draw.io and screenshotted, or drawn directly here. There's no required layout: pick a starting point below only if it helps.
+    </div>
+
+    <div id="m_frames"></div>
+    <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addMockupBtn">+ Add another mock-up option</button></div>
+
+    <div class="block">
+      <h2>Which mock-up are you taking forward, and why?</h2>
+      <p class="hint">Tie this back to your requirements and success criteria from Week 1, not just which one looks nicest.</p>
+      <textarea data-field="m_choice"></textarea>
+    </div>
+  </section>
+
+  <!-- PAGE 3: Style Test Page Planner -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Style Test Page Planner</h1><p>Week 4 (Week 2 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: appropriate techniques for the domain (AS92005 L1) · at least two advanced techniques following conventions (AS91893 L2) · complex/advanced processes trialled before full build (AS91897/91907 L2/L3)</p></div>
+      <span class="sheet-badge">Worksheet 3 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="t_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="t_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="t_date"></div>
+    </div>
+
+    <div class="block">
+      <h2>What will your style test page include?</h2>
+      <p class="hint">A style test page is a scratch page where you try out fonts, colours and components before building the real site — tick what you'll test.</p>
+      <ul class="checklist" id="t_checklist">
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_headings"> Heading styles (H1–H3)</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_body"> Body text &amp; paragraph spacing</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_buttons"> Buttons (default + hover state)</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_nav"> Navigation link states</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_image"> Image with alt text</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_form"> Form input example</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_swatches"> Colour swatches</li>
+        <li><input type="checkbox" class="chk-input" data-field="t_chk_custom1"><input type="text" data-field="t_chk_custom1_text" placeholder="Add your own..."></li>
+      </ul>
+      <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" data-add="t_checklist" data-mode="checklist">+ Add item</button></div>
+    </div>
+
+    <div class="block">
+      <h2>Advanced techniques you'll test here</h2>
+      <p class="hint">Name at least two specific techniques (Digitec 2/3) — e.g. CSS Flexbox/Grid layout, hover/transition effects, custom web fonts, responsive breakpoints, CSS variables.</p>
+      <textarea data-field="t_techniques"></textarea>
+    </div>
+
+    <div class="block">
+      <h2>Conventions you'll follow</h2>
+      <p class="hint">e.g. semantic HTML5 elements, consistent class naming, indentation, code comments, W3C validation.</p>
+      <textarea data-field="t_conventions"></textarea>
+    </div>
+  </section>
+
+  <!-- PAGE 4: Asset Collection & Crediting Log -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Asset Collection &amp; Crediting Log</h1><p>Week 4 (Week 2 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: appropriate use of tools/techniques (AS92005 L1) · original/properly credited work following conventions (AS91893 L2) · legal &amp; intellectual property implications addressed (AS91897 L2)</p></div>
+      <span class="sheet-badge">Worksheet 4 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="a_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="a_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="a_date"></div>
+    </div>
+    <p class="hint">Log every image, icon, font or other media file here as you collect it — an assessor needs to see that nothing was used without the right to use it. A thumbnail is optional but useful.</p>
+
+    <div id="a_assets"></div>
+    <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addAssetBtn">+ Add asset</button></div>
+  </section>
+
+  <footer>Digitec 1, 2, 3 · Week 2 Digital Workbook · Developed by Sam McGuire 2026</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "digitec_week2_workbook_v1";
+  var optionControllers = {};   // mock-up options, id -> controller
+  var assetControllers = {};    // asset rows, id -> controller
+  var optionCount = 0;
+  var assetCount = 0;
+
+  function esc(s){
+    s = (s===undefined||s===null) ? "" : ("" + s);
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  /* ================= shared field engine ================= */
+  function forEachField(fn){
+    var els = document.querySelectorAll("[data-field]");
+    for(var i=0;i<els.length;i++){ fn(els[i], els[i].getAttribute("data-field")); }
+  }
+
+  /* ================= colour swatches (extra rows) ================= */
+  function wireSwatchPair(div){
+    var colorEl = div.querySelector("input[type=color]");
+    var hexEl = div.querySelector("input[type=text]");
+    if(!colorEl || !hexEl) return;
+    colorEl.addEventListener("input", function(){
+      hexEl.value = colorEl.value;
+      autosave();
+    });
+    hexEl.addEventListener("input", function(){
+      var v = hexEl.value.trim();
+      if(/^#[0-9A-Fa-f]{6}$/.test(v)){ colorEl.value = v; }
+    });
+    // keep the hex box showing what the picker actually holds on load
+    if(!hexEl.value){ hexEl.value = colorEl.value; }
+  }
+  var swatchCount = 5;
+  var initialSwatches = document.querySelectorAll("#c_swatches .swatch");
+  for(var si=0; si<initialSwatches.length; si++){ wireSwatchPair(initialSwatches[si]); }
+
+  document.getElementById("addSwatchBtn").addEventListener("click", function(){
+    swatchCount++;
+    var div = document.createElement("div");
+    div.className = "swatch";
+    div.innerHTML = "<label>Colour " + swatchCount + "</label>" +
+      "<input type='color' data-field='c_sw" + swatchCount + "_color' value='#cccccc'>" +
+      "<input type='text' data-field='c_sw" + swatchCount + "_hex' placeholder='#cccccc'>";
+    document.getElementById("c_swatches").appendChild(div);
+    wireSwatchPair(div);
+    autosave();
+  });
+
+  /* ================= mock-up workbook (same engine as Week 1 wireframes) ================= */
+  var TEMPLATES = {
+    blank: "",
+    stacked: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-zone' style='flex:0 0 55px'>Hero</div><div class='wf-zone'>Content</div><div class='wf-zone' style='flex:0 0 20px'>Footer</div>",
+    sidebar: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-row' style='flex:1'><div class='wf-zone' style='flex:3'>Main content</div><div class='wf-zone' style='flex:1'>Sidebar</div></div><div class='wf-zone' style='flex:0 0 20px'>Footer</div>",
+    grid: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-zone' style='flex:0 0 40px'>Hero</div><div class='wf-row' style='flex:1'><div class='wf-zone'>Card</div><div class='wf-zone'>Card</div></div><div class='wf-row' style='flex:1'><div class='wf-zone'>Card</div><div class='wf-zone'>Card</div></div><div class='wf-zone' style='flex:0 0 20px'>Footer</div>",
+    split: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-row' style='flex:0 0 65px'><div class='wf-zone'>Image</div><div class='wf-zone'>Heading + text</div></div><div class='wf-zone'>Content</div><div class='wf-zone' style='flex:0 0 20px'>Footer</div>",
+    article: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-zone' style='flex:0 0 28px'>Title / byline</div><div class='wf-zone'>Article content</div><div class='wf-zone' style='flex:0 0 20px'>Footer</div>",
+    landing: "<div class='wf-zone' style='flex:0 0 24px'>Nav</div><div class='wf-zone' style='flex:0 0 55px'>Hero + CTA button</div><div class='wf-row' style='flex:0 0 45px'><div class='wf-zone'>Feature</div><div class='wf-zone'>Feature</div><div class='wf-zone'>Feature</div></div><div class='wf-zone' style='flex:0 0 24px'>CTA / footer</div>"
+  };
+  var TEMPLATE_LABELS = {
+    blank: "Blank canvas", stacked: "Simple stacked (nav / hero / content / footer)",
+    sidebar: "Sidebar layout", grid: "Card grid layout", split: "Split-screen hero",
+    article: "Blog / article layout", landing: "Landing page with CTA"
+  };
+
+  function nextLetter(){ return String.fromCharCode(65 + optionCount); }
+
+  function addMockup(letter, removable){
+    letter = letter || nextLetter();
+    var id = letter.toLowerCase();
+    optionCount++;
+
+    var wrap = document.createElement("div");
+    wrap.className = "wf-option";
+    wrap.setAttribute("data-opt", id);
+
+    var templateOptionsHtml = "";
+    for(var key in TEMPLATE_LABELS){
+      if(TEMPLATE_LABELS.hasOwnProperty(key)){
+        templateOptionsHtml += "<option value='" + key + "'>" + TEMPLATE_LABELS[key] + "</option>";
+      }
+    }
+
+    wrap.innerHTML =
+      "<div class='wf-option-head'><h2>Mock-up Option " + letter + "</h2>" +
+      (removable ? "<button class='wf-remove-btn no-print' type='button' data-remove-opt>Remove</button>" : "") +
+      "</div>" +
+      "<div class='wf-toolbar no-print'>" +
+      "<select class='wf-template'>" + templateOptionsHtml + "</select>" +
+      "<button class='btn btn-add wf-draw-btn' type='button'>✏️ Draw here</button>" +
+      "<button class='btn btn-add wf-upload-btn' type='button'>📷 Upload photo/screenshot</button>" +
+      "<input type='file' accept='image/*' class='wf-file-input' style='display:none'>" +
+      "<button class='btn btn-add wf-clear-btn' type='button'>🧹 Clear</button>" +
+      "</div>" +
+      "<div class='wf-frame'>" +
+      "<div class='wf-frame-bar'><span class='dot'></span><span class='dot'></span><span class='dot'></span>" +
+      "<input type='text' class='wf-title' data-field='m_" + id + "_title' placeholder='What page is this?'></div>" +
+      "<div class='wf-canvas-wrap'>" +
+      "<div class='wf-guide'></div>" +
+      "<canvas class='wf-draw-canvas'></canvas>" +
+      "<img class='wf-uploaded-img' alt=''>" +
+      "<div class='wf-empty-hint'>Pick a starting point, draw, or upload a photo/screenshot above</div>" +
+      "</div></div>" +
+      "<div class='wf-notes'><textarea data-field='m_" + id + "_notes' placeholder='Notes on this mock-up (optional)'></textarea></div>";
+
+    document.getElementById("m_frames").appendChild(wrap);
+    var controller = initMockupOption(wrap);
+    optionControllers[id] = controller;
+    if(removable){
+      wrap.querySelector("[data-remove-opt]").addEventListener("click", function(){
+        delete optionControllers[id];
+        wrap.parentNode.removeChild(wrap);
+        autosave();
+      });
+    }
+    return controller;
+  }
+
+  function getPos(e, canvas){
+    var rect = canvas.getBoundingClientRect();
+    var clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    var clientY = (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
+    return {
+      x: (clientX - rect.left) * (canvas.width / rect.width),
+      y: (clientY - rect.top) * (canvas.height / rect.height)
+    };
+  }
+
+  function initMockupOption(wrap){
+    var templateSel = wrap.querySelector(".wf-template");
+    var guideEl = wrap.querySelector(".wf-guide");
+    var canvas = wrap.querySelector(".wf-draw-canvas");
+    var img = wrap.querySelector(".wf-uploaded-img");
+    var emptyHint = wrap.querySelector(".wf-empty-hint");
+    var drawBtn = wrap.querySelector(".wf-draw-btn");
+    var uploadBtn = wrap.querySelector(".wf-upload-btn");
+    var fileInput = wrap.querySelector(".wf-file-input");
+    var clearBtn = wrap.querySelector(".wf-clear-btn");
+    var ctx = canvas.getContext("2d");
+
+    canvas.width = 720;
+    canvas.height = 220;
+
+    var drawMode = false, isDrawing = false, hasDrawn = false, hasImage = false;
+
+    function updateEmptyHint(){ emptyHint.style.display = (hasDrawn || hasImage) ? "none" : "flex"; }
+
+    templateSel.addEventListener("change", function(){
+      guideEl.innerHTML = TEMPLATES[templateSel.value] || "";
+      autosave();
+    });
+
+    drawBtn.addEventListener("click", function(){
+      drawMode = !drawMode;
+      canvas.style.pointerEvents = drawMode ? "auto" : "none";
+      drawBtn.textContent = drawMode ? "✏️ Drawing ON (click to stop)" : "✏️ Draw here";
+      drawBtn.className = drawMode ? "btn btn-add wf-draw-btn active" : "btn btn-add wf-draw-btn";
+    });
+
+    canvas.addEventListener("pointerdown", function(e){
+      if(!drawMode) return;
+      isDrawing = true; hasDrawn = true;
+      try{ canvas.setPointerCapture(e.pointerId); }catch(err){}
+      var pos = getPos(e, canvas);
+      ctx.beginPath(); ctx.moveTo(pos.x, pos.y); ctx.lineTo(pos.x + 0.1, pos.y + 0.1);
+      ctx.strokeStyle = "#17324d"; ctx.lineWidth = 2.5; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      ctx.stroke();
+      updateEmptyHint();
+    });
+    canvas.addEventListener("pointermove", function(e){
+      if(!isDrawing) return;
+      var pos = getPos(e, canvas);
+      ctx.lineTo(pos.x, pos.y); ctx.stroke();
+    });
+    function stopDrawing(){ if(isDrawing){ isDrawing = false; autosave(); } }
+    canvas.addEventListener("pointerup", stopDrawing);
+    canvas.addEventListener("pointerleave", stopDrawing);
+    canvas.addEventListener("pointercancel", stopDrawing);
+
+    uploadBtn.addEventListener("click", function(){ fileInput.click(); });
+    fileInput.addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if(!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        img.src = ev.target.result; img.style.display = "block"; hasImage = true;
+        updateEmptyHint(); autosave();
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    });
+
+    clearBtn.addEventListener("click", function(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasDrawn = false;
+      img.src = ""; img.style.display = "none"; hasImage = false;
+      templateSel.value = "blank"; guideEl.innerHTML = "";
+      updateEmptyHint(); autosave();
+    });
+
+    updateEmptyHint();
+
+    return {
+      getState: function(){
+        return {
+          template: templateSel.value, hasDrawn: hasDrawn,
+          drawingData: hasDrawn ? canvas.toDataURL("image/png") : null,
+          hasImage: hasImage, imageData: hasImage ? img.src : null
+        };
+      },
+      setState: function(state){
+        if(!state) return;
+        if(state.template){ templateSel.value = state.template; guideEl.innerHTML = TEMPLATES[state.template] || ""; }
+        if(state.hasDrawn && state.drawingData){
+          var image = new Image();
+          image.onload = function(){ ctx.drawImage(image, 0, 0, canvas.width, canvas.height); };
+          image.src = state.drawingData;
+          hasDrawn = true;
+        }
+        if(state.hasImage && state.imageData){ img.src = state.imageData; img.style.display = "block"; hasImage = true; }
+        updateEmptyHint();
+      },
+      reset: function(){ clearBtn.click(); }
+    };
+  }
+
+  document.getElementById("addMockupBtn").addEventListener("click", function(){
+    addMockup(nextLetter(), true);
+    autosave();
+  });
+
+  /* ================= asset log ================= */
+  function nextAssetId(){ assetCount++; return "asset" + assetCount; }
+
+  function addAsset(id, removable){
+    id = id || nextAssetId();
+
+    var card = document.createElement("div");
+    card.className = "asset-card";
+    card.setAttribute("data-asset", id);
+    card.innerHTML =
+      "<div class='asset-top'>" +
+      "<div class='asset-thumb-wrap'><img class='asset-thumb-img' alt=''><span class='asset-thumb-hint no-print'>Thumbnail</span></div>" +
+      "<div class='asset-fields'>" +
+      "<div><label>What is it?</label><input type='text' data-field='" + id + "_desc' placeholder='e.g. Skate park hero photo'></div>" +
+      "<div><label>Type</label><select data-field='" + id + "_type'>" +
+      "<option value='image'>Image / photo</option><option value='icon'>Icon</option><option value='font'>Font</option>" +
+      "<option value='audio'>Audio</option><option value='video'>Video</option><option value='other'>Other</option></select></div>" +
+      "<div><label>Source</label><select data-field='" + id + "_source'>" +
+      "<option value='own'>My own (created/photographed by me)</option><option value='supplied'>Supplied by stakeholder</option>" +
+      "<option value='free'>Found — free to use / no credit needed</option><option value='credit'>Found — needs credit</option>" +
+      "<option value='permission'>Found — needs permission (not yet obtained)</option></select></div>" +
+      "<div><label>Used on page(s)</label><input type='text' data-field='" + id + "_usage' placeholder='e.g. Home, Contact'></div>" +
+      "<div class='full'><label>Credit text / licence needed</label><input type='text' data-field='" + id + "_credit' placeholder='e.g. Photo by M. Delaney, used with permission'></div>" +
+      "</div></div>" +
+      "<div class='asset-actions no-print'>" +
+      "<button class='btn btn-add asset-upload-btn' type='button'>📷 Add thumbnail</button>" +
+      "<input type='file' accept='image/*' class='asset-file-input' style='display:none'>" +
+      "<button class='btn btn-add asset-remove-thumb-btn' type='button'>🧹 Remove thumbnail</button>" +
+      (removable ? "<button class='wf-remove-btn' type='button' data-remove-asset>Remove asset</button>" : "") +
+      "</div>";
+
+    document.getElementById("a_assets").appendChild(card);
+    var controller = initAsset(card);
+    assetControllers[id] = controller;
+    if(removable){
+      card.querySelector("[data-remove-asset]").addEventListener("click", function(){
+        delete assetControllers[id];
+        card.parentNode.removeChild(card);
+        autosave();
+      });
+    }
+    return controller;
+  }
+
+  function initAsset(card){
+    var img = card.querySelector(".asset-thumb-img");
+    var hint = card.querySelector(".asset-thumb-hint");
+    var uploadBtn = card.querySelector(".asset-upload-btn");
+    var fileInput = card.querySelector(".asset-file-input");
+    var removeThumbBtn = card.querySelector(".asset-remove-thumb-btn");
+    var hasImage = false;
+
+    uploadBtn.addEventListener("click", function(){ fileInput.click(); });
+    fileInput.addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if(!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        img.src = ev.target.result; img.style.display = "block"; hint.style.display = "none";
+        hasImage = true; autosave();
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    });
+    removeThumbBtn.addEventListener("click", function(){
+      img.src = ""; img.style.display = "none"; hint.style.display = "block";
+      hasImage = false; autosave();
+    });
+
+    return {
+      getState: function(){ return { hasImage: hasImage, imageData: hasImage ? img.src : null }; },
+      setState: function(state){
+        if(state && state.hasImage && state.imageData){
+          img.src = state.imageData; img.style.display = "block"; hint.style.display = "none"; hasImage = true;
+        }
+      },
+      reset: function(){ removeThumbBtn.click(); }
+    };
+  }
+
+  document.getElementById("addAssetBtn").addEventListener("click", function(){
+    addAsset(null, true);
+    autosave();
+  });
+
+  /* ================= add-field buttons (checklist etc.) ================= */
+  var addButtons = document.querySelectorAll("[data-add]");
+  for(var i=0;i<addButtons.length;i++){
+    addButtons[i].addEventListener("click", function(e){
+      var targetId = e.target.getAttribute("data-add");
+      var target = document.getElementById(targetId);
+      var li = document.createElement("li");
+      li.innerHTML = "<input type='checkbox' class='chk-input'><input type='text' placeholder='Add your own...'>";
+      target.appendChild(li);
+    });
+  }
+
+  /* ================= example data ================= */
+  var EXAMPLE_DATA = {
+    c_sw1_color: "#1f6feb", c_sw1_hex: "#1f6feb", c_sw2_color: "#2aa7c9", c_sw2_hex: "#2aa7c9",
+    c_sw3_color: "#d9981e", c_sw3_hex: "#d9981e", c_sw4_color: "#ffffff", c_sw4_hex: "#ffffff",
+    c_sw5_color: "#17324d", c_sw5_hex: "#17324d",
+    c_contrast_notes: "Dark blue text (#17324d) on white background passes easily (well over 7:1). White text on the primary blue (#1f6feb) passes for large headings but is borderline for small body text, so body text stays dark on white or light backgrounds only.",
+    c_heading_font: "Poppins", c_body_font: "Open Sans",
+    c_font_rationale: "Poppins for headings feels friendly and rounded, which fits a community skate park rather than something corporate. Open Sans for body text is highly legible on screens at small sizes, and both are free Google Fonts so there's no licensing issue.",
+
+    m_a_title: "Homepage mock-up — Option A", m_a_notes: "Applied the chosen blue/amber palette to the 'simple stacked' layout from Week 1, Option A. Amber used sparingly for the CTA button only, so it doesn't compete with the hero photo.",
+    m_b_title: "Homepage mock-up — Option B", m_b_notes: "Tried a version with a darker background behind the hero photo and white text overlay, to make the opening-hours banner pop more. Kept for comparison.",
+    m_choice: "Going with Option A — the darker hero background in Option B made the photo itself harder to see clearly, and Mike specifically wanted the space to feel welcoming and photo-led rather than heavy.",
+
+    t_chk_headings: true, t_chk_body: true, t_chk_buttons: true, t_chk_nav: true, t_chk_image: true, t_chk_form: false, t_chk_swatches: true,
+    t_techniques: "CSS Flexbox for the nav and card layout; a hover/transition effect on buttons and nav links; a custom Google Font loaded via @import; a responsive breakpoint that stacks the three content blocks into one column under 600px.",
+    t_conventions: "Semantic HTML5 elements (nav, header, main, footer) instead of divs everywhere; class names in lowercase-with-hyphens; a comment above each major CSS section; validating HTML and CSS with the W3C validator before moving on.",
+
+    asset1_desc: "Skate park hero photo", asset1_type: "image", asset1_source: "supplied", asset1_usage: "Home", asset1_credit: "Photo supplied by Wainuiomata Skate Park Committee, used with permission",
+    asset2_desc: "Heading font — Poppins", asset2_type: "font", asset2_source: "free", asset2_usage: "All pages", asset2_credit: "Poppins, Google Fonts, Open Font License — no credit required but named here for the record"
+  };
+
+  function fillExample(){
+    forEachField(function(el, key){
+      if(!(key in EXAMPLE_DATA)) return;
+      var val = EXAMPLE_DATA[key];
+      if(el.type === "checkbox"){ el.checked = !!val; }
+      else if(el.tagName === "INPUT" || el.tagName === "SELECT" || el.tagName === "TEXTAREA"){ if(val !== undefined && val !== "") el.value = val; }
+      else { if(val) el.textContent = val; }
+    });
+    if(optionControllers.a){ optionControllers.a.setState({ template: "stacked" }); }
+    if(optionControllers.b){ optionControllers.b.setState({ template: "split" }); }
+    autosave();
+  }
+
+  function clearAll(){
+    forEachField(function(el){
+      if(el.type === "checkbox"){ el.checked = false; }
+      else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA"){ el.value = ""; }
+      else if(el.tagName === "SELECT"){ el.selectedIndex = 0; }
+      else { el.textContent = ""; }
+    });
+    for(var id in optionControllers){ optionControllers[id].reset(); }
+    for(var aid in assetControllers){ assetControllers[aid].reset(); }
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+    document.getElementById("saveNote").textContent = "Not saved yet";
+  }
+
+  /* ================= autosave / backup ================= */
+  function collectData(){
+    var fields = {};
+    forEachField(function(el, key){
+      if(el.type === "checkbox"){ fields[key] = el.checked; }
+      else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT"){ fields[key] = el.value; }
+      else { fields[key] = el.textContent; }
+    });
+    var options = [];
+    for(var id in optionControllers){ var s = optionControllers[id].getState(); s.id = id; options.push(s); }
+    var assets = [];
+    for(var aid in assetControllers){ var as = assetControllers[aid].getState(); as.id = aid; assets.push(as); }
+    return { fields: fields, options: options, assets: assets, savedAt: new Date().toISOString() };
+  }
+
+  function applyData(data){
+    if(!data) return;
+    if(data.fields){
+      forEachField(function(el, key){
+        if(!(key in data.fields)) return;
+        var val = data.fields[key];
+        if(el.type === "checkbox"){ el.checked = !!val; }
+        else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT"){ el.value = val || ""; }
+        else { el.textContent = val || ""; }
+      });
+    }
+    if(data.options && data.options.length){
+      for(var i=0;i<data.options.length;i++){
+        var optId = data.options[i].id;
+        if(!optionControllers[optId]){ addMockup(optId.toUpperCase(), optId !== "a" && optId !== "b"); }
+        optionControllers[optId].setState(data.options[i]);
+      }
+    }
+    if(data.assets && data.assets.length){
+      for(var j=0;j<data.assets.length;j++){
+        var aid = data.assets[j].id;
+        if(!assetControllers[aid]){ addAsset(aid, true); }
+        assetControllers[aid].setState(data.assets[j]);
+      }
+    }
+  }
+
+  var autosaveTimer = null;
+  function autosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try{
+        var data = collectData();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        document.getElementById("saveNote").textContent = "Saved " + new Date(data.savedAt).toLocaleTimeString();
+      }catch(e){
+        document.getElementById("saveNote").textContent = "Could not save (storage may be full)";
+      }
+    }, 400);
+  }
+
+  function restoreFromStorage(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw);
+      applyData(data);
+      document.getElementById("saveNote").textContent = "Restored from " + new Date(data.savedAt).toLocaleTimeString();
+    }catch(e){ /* ignore corrupt storage */ }
+  }
+
+  function saveBackup(){
+    var data = collectData();
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Week2_Workbook_Backup_" + new Date().toISOString().slice(0,10) + ".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  function loadBackup(file){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      try{ applyData(JSON.parse(e.target.result)); autosave(); }
+      catch(err){ alert("Could not read that backup file."); }
+    };
+    reader.readAsText(file);
+  }
+
+  /* ================= toolbar wiring ================= */
+  document.getElementById("fillBtn").addEventListener("click", fillExample);
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    if(confirm("Clear every field, sketch and image on all four worksheets? This can't be undone.")){ clearAll(); }
+  });
+  document.getElementById("saveBackupBtn").addEventListener("click", saveBackup);
+  document.getElementById("loadBackupBtn").addEventListener("click", function(){ document.getElementById("backupFileInput").click(); });
+  document.getElementById("backupFileInput").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    if(file) loadBackup(file);
+    e.target.value = "";
+  });
+
+  document.addEventListener("input", function(e){
+    if(e.target.getAttribute && e.target.getAttribute("data-field")){ autosave(); }
+  });
+  document.addEventListener("change", function(e){
+    if(e.target.getAttribute && e.target.getAttribute("data-field")){ autosave(); }
+  });
+
+  /* ================= init ================= */
+  addMockup("A", false);
+  addMockup("B", false);
+  addAsset(null, false);
+  addAsset(null, false);
+  restoreFromStorage();
+})();
+</script>
+</body>
+</html>
