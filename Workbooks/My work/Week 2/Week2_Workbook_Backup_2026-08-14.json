@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "c_name": "Taylor Sinnott",
+    "c_class": "DigiTec123",
+    "c_date": "14/8/2026",
+    "c_sw1_color": "#9fbde5",
+    "c_sw1_hex": "#9FBDE5",
+    "c_sw2_color": "#e2e278",
+    "c_sw2_hex": "#E2E278",
+    "c_sw3_color": "#eb804b",
+    "c_sw3_hex": "#EB804B",
+    "c_sw4_color": "#9cadf6",
+    "c_sw4_hex": "#9CADF6",
+    "c_sw5_color": "#17324d",
+    "c_sw5_hex": "#17324d",
+    "c_contrast_notes": "",
+    "c_heading_font": "",
+    "c_body_font": "",
+    "c_font_rationale": "",
+    "m_name": "Taylor Sinnott",
+    "m_class": "DigiTec123",
+    "m_date": "//2026",
+    "m_a_title": "",
+    "m_a_notes": "",
+    "m_b_title": "",
+    "m_b_notes": "",
+    "m_choice": "",
+    "t_name": "",
+    "t_class": "DigiTec123",
+    "t_date": "//2026",
+    "t_chk_headings": false,
+    "t_chk_body": false,
+    "t_chk_buttons": false,
+    "t_chk_nav": false,
+    "t_chk_image": false,
+    "t_chk_form": false,
+    "t_chk_swatches": false,
+    "t_chk_custom1": false,
+    "t_chk_custom1_text": "",
+    "t_techniques": "",
+    "t_conventions": "",
+    "a_name": "Taylor sinnott",
+    "a_class": "DigiTec123",
+    "a_date": "//2026",
+    "asset1_desc": "",
+    "asset1_type": "image",
+    "asset1_source": "own",
+    "asset1_usage": "",
+    "asset1_credit": "",
+    "asset2_desc": "",
+    "asset2_type": "image",
+    "asset2_source": "own",
+    "asset2_usage": "",
+    "asset2_credit": ""
+  },
+  "options": [
+    {
+      "template": "blank",
+      "hasDrawn": false,
+      "drawingData": null,
+      "hasImage": false,
+      "imageData": null,
+      "id": "a"
+    },
+    {
+      "template": "blank",
+      "hasDrawn": false,
+      "drawingData": null,
+      "hasImage": false,
+      "imageData": null,
+      "id": "b"
+    }
+  ],
+  "assets": [
+    {
+      "hasImage": false,
+      "imageData": null,
+      "id": "asset1"
+    },
+    {
+      "hasImage": false,
+      "imageData": null,
+      "id": "asset2"
+    }
+  ],
+  "savedAt": "2026-08-14T00:53:05.865Z"
+}
