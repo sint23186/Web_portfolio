@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 3 — Build Phase Digital Workbook</title>
+<link rel='icon' href='data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCc+CjxjaXJjbGUgY3g9JzMyJyBjeT0nMzInIHI9JzMwJyBmaWxsPScjMWY2ZmViJy8+CjxwYXRoIGQ9J00xMiAzMmg0ME0zMiA0YzggOCAxMiAxOCAxMiAyOFM0MCA1MiAzMiA2MEMyNCA1MiAyMCA0MiAyMCAzMlMyNCAxMiAzMiA0ek0xNiAxOGM2IDMgMTYgNSAxNiA1czEwLTIgMTYtNU0xNiA0NmM2LTMgMTYtNSAxNi01czEwIDIgMTYgNScgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPSczJyBmaWxsPSdub25lJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz4KPC9zdmc+'>
+<meta name='theme-color' content='#17324d'>
+<style>
+:root{
+  --ink:#17324d; --muted:#5c6f82; --line:#c9d6e2; --paper:#ffffff;
+  --blue:#1f6feb; --cyan:#2aa7c9; --purple:#7656d6; --green:#2e9d68;
+  --amber:#d9981e; --red:#c74a4a; --soft:#eef5fb;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#dfeaf4;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.toolbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 16px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);flex-wrap:wrap}
+.toolbar .left{font-size:13px;color:var(--muted);font-weight:bold;display:flex;flex-direction:column;gap:2px}
+.toolbar .left .save-note{font-size:10.5px;font-weight:normal;color:var(--muted)}
+.toolbar .right{display:flex;gap:8px;flex-wrap:wrap}
+.btn{appearance:none;border:0;border-radius:10px;background:#17324d;color:#fff;padding:9px 15px;
+  font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 3px 10px rgba(23,50,77,.18)}
+.btn:hover{background:#1f6feb}
+.btn-outline{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);background:#fff}
+.btn-add{background:var(--soft);color:var(--blue);border:1px dashed var(--blue);box-shadow:none;padding:6px 12px;font-size:12px}
+.btn-add:hover{background:#e2f0ff}
+.wrap{width:min(880px,calc(100% - 24px));margin:20px auto}
+.sheet{background:var(--paper);border:1px solid #b7c7d5;border-radius:16px;box-shadow:0 12px 30px rgba(23,50,77,.15);
+  padding:26px 30px 22px;margin-bottom:22px}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;border-bottom:3px solid var(--blue);
+  padding-bottom:12px;margin-bottom:16px}
+.sheet-head h1{margin:0 0 4px;font-size:22px}
+.sheet-head p{margin:0;font-size:12px;color:var(--muted)}
+.sheet-badge{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:11px;
+  font-weight:bold;color:var(--blue);white-space:nowrap}
+.id-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.field{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+.field b,label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;font-weight:bold;margin-bottom:3px}
+input[type=text],input[type=date],textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 9px;
+  font-size:13px;font-family:inherit;color:var(--ink)}
+textarea{min-height:56px;resize:vertical}
+.block{margin-bottom:16px}
+.block h2{font-size:14px;margin:0 0 8px;color:var(--ink)}
+.block .hint{font-size:11.5px;color:var(--muted);margin:-4px 0 8px}
+.std-note{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.freedom-note{background:#eef9f2;border-left:4px solid var(--green);border-radius:8px;padding:10px 14px;
+  font-size:12.5px;color:#1c5c3f;margin-bottom:14px}
+.freedom-note b{color:#164a32}
+.add-row-wrap{margin-top:8px}
+footer{padding:14px 4px 30px;color:var(--muted);font-size:11px;text-align:center}
+/* generic repeatable card */
+.rcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px;background:#fbfdff}
+.rcard-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.rcard-head input[type=text]{font-weight:bold}
+.rcard-remove{background:#fff;border:1px solid var(--red);color:var(--red);border-radius:8px;padding:4px 9px;font-size:11px;cursor:pointer;flex:none}
+.rgrid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.rgrid2 .full{grid-column:1 / -1}
+/* checklist */
+.checklist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.checklist li{display:flex;gap:8px;align-items:center;font-size:13px}
+input.chk-input{appearance:none;-webkit-appearance:none;width:15px;height:15px;border:2px solid var(--ink);
+  border-radius:3px;flex:none;margin:0;cursor:pointer;position:relative}
+input.chk-input:checked{background:var(--green);border-color:var(--green)}
+input.chk-input:checked::after{content:'✓';position:absolute;top:-3px;left:1px;color:#fff;font-size:11px;font-weight:bold}
+/* evidence log thumbnail */
+.evi-thumb-wrap{width:100%;min-height:110px;border:2px dashed var(--line);border-radius:8px;position:relative;
+  overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.evi-thumb-wrap img{width:100%;height:100%;object-fit:contain;display:none;position:absolute;inset:0}
+.evi-thumb-hint{font-size:11px;color:var(--muted);text-align:center;padding:6px}
+.evi-actions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.evi-actions button{font-size:11px;padding:5px 9px}
+@media print{
+  @page{size:A4 portrait;margin:12mm}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toolbar,.no-print{display:none!important}
+  .wrap{width:100%;margin:0}
+  .sheet{box-shadow:none;border:1px solid #999;border-radius:0;page-break-after:always}
+  .sheet:last-of-type{page-break-after:auto}
+  .rcard{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="left">
+    <span>Week 3 — Build Phase · Digital Workbook</span>
+    <span class="save-note" id="saveNote">Not saved yet</span>
+  </div>
+  <div class="right">
+    <button class="btn btn-outline" type="button" id="fillBtn">📘 Load Exemplar Answers</button>
+    <button class="btn btn-outline" type="button" id="saveBackupBtn">💾 Save Backup</button>
+    <button class="btn btn-outline" type="button" id="loadBackupBtn">📂 Load Backup</button>
+    <input type="file" id="backupFileInput" accept="application/json" style="display:none">
+    <button class="btn btn-outline" type="button" id="clearBtn">🧹 Clear All Fields</button>
+    <button class="btn" type="button" onclick="window.print()">🖨 Print all</button>
+  </div>
+</div>
+<div class="wrap">
+
+  <!-- PAGE 1: File/Folder Structure & Version Control -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>File Structure &amp; Version Control Plan</h1><p>Week 5 (Week 3 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: appropriate tools/techniques (AS92005 L1) · project management &amp; version control (AS91897 L2, AS91907 L3)</p></div>
+      <span class="sheet-badge">Worksheet 1 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="f_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="f_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="f_date"></div>
+    </div>
+
+    <div class="freedom-note">
+      <b>Any sensible structure works.</b> A folder-per-type (images/, css/, pages/) and a flat structure with clear file names both work fine — what matters is that it's consistent and you can explain your choices.
+    </div>
+
+    <div class="block">
+      <h2>Folder &amp; file structure</h2>
+      <p class="hint">List each folder or key file and what goes in it.</p>
+      <div id="f_folders"></div>
+      <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addFolderBtn">+ Add folder/file</button></div>
+    </div>
+
+    <div class="block">
+      <h2>File naming convention</h2>
+      <p class="hint">e.g. lowercase, hyphens instead of spaces, no special characters — consistency matters more than the exact rule.</p>
+      <textarea data-field="f_naming"></textarea>
+    </div>
+
+    <div class="block">
+      <h2>Version control &amp; backup plan</h2>
+      <p class="hint">How will you avoid losing work, and how will you track what changed between versions?</p>
+      <textarea data-field="f_version"></textarea>
+    </div>
+  </section>
+
+  <!-- PAGE 2: Component Decomposition -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Component Decomposition Planner</h1><p>Week 5 (Week 3 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: decomposing the outcome into smaller components before building (AS91897 L2, AS91907 L3)</p></div>
+      <span class="sheet-badge">Worksheet 2 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="k_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="k_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="k_date"></div>
+    </div>
+    <p class="hint">Before coding everything at once, break your site into reusable pieces — a nav bar, header, footer, card layout — that you can build once and reuse.</p>
+
+    <div id="k_components"></div>
+    <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addComponentBtn">+ Add component</button></div>
+  </section>
+
+  <!-- PAGE 3: Page Build Tracker -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Page Build Tracker</h1><p>Week 5 (Week 3 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: producing an outcome addressing requirements (AS92005 L1) · testing functionality as components are built (AS91897 L2, AS91907 L3)</p></div>
+      <span class="sheet-badge">Worksheet 3 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="p_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="p_class"></div>
+      <div class="field"><b>Date</b><input type="text" data-field="p_date"></div>
+    </div>
+    <p class="hint">One card per page. Tick off each stage as you go, not all at once at the end — that's what makes this useful as evidence.</p>
+
+    <div id="p_pages"></div>
+    <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addPageBtn">+ Add page</button></div>
+  </section>
+
+  <!-- PAGE 4: Development Evidence Log -->
+  <section class="sheet">
+    <div class="sheet-head">
+      <div><h1>Development Evidence Log</h1><p>Week 5 (Week 3 of project) · Website Development Portfolio</p>
+      <p class="std-note">Evidence here supports: refining using testing/trialling information (AS92005 L1 Excellence) · trialling and testing evidence (AS91897 L2, AS91907 L3) · discussion of how testing assisted a high-quality outcome (L2/L3 Excellence)</p></div>
+      <span class="sheet-badge">Worksheet 4 of 4</span>
+    </div>
+    <div class="id-row">
+      <div class="field"><b>Name</b><input type="text" data-field="e_name"></div>
+      <div class="field"><b>Class</b><input type="text" data-field="e_class"></div>
+      <div class="field"><b>Date started</b><input type="text" data-field="e_date"></div>
+    </div>
+    <div class="freedom-note">
+      <b>A few short entries beat one big write-up at the end.</b> Add an entry whenever you build something, hit a problem, or test something — a screenshot is optional but makes this much stronger evidence.
+    </div>
+
+    <div id="e_entries"></div>
+    <div class="add-row-wrap no-print"><button class="btn btn-add" type="button" id="addEntryBtn">+ Add entry</button></div>
+  </section>
+
+  <footer>Digitec 1, 2, 3 · Week 3 Digital Workbook · Developed by Sam McGuire 2026</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "digitec_week3_workbook_v1";
+  var folderControllers = {}, componentControllers = {}, pageControllers = {}, entryControllers = {};
+  var folderCount = 0, componentCount = 0, pageCount = 0, entryCount = 0;
+
+  function forEachField(fn){
+    var els = document.querySelectorAll("[data-field]");
+    for(var i=0;i<els.length;i++){ fn(els[i], els[i].getAttribute("data-field")); }
+  }
+
+  /* ================= Worksheet 1: folders ================= */
+  function addFolder(id, removable){
+    id = id || ("folder" + (++folderCount));
+    var card = document.createElement("div");
+    card.className = "rcard";
+    card.innerHTML =
+      "<div class='rcard-head'><input type='text' data-field='" + id + "_name' placeholder='e.g. images/'>" +
+      (removable ? "<button class='rcard-remove no-print' type='button' data-remove>Remove</button>" : "") + "</div>" +
+      "<textarea data-field='" + id + "_desc' placeholder='What goes here?'></textarea>";
+    document.getElementById("f_folders").appendChild(card);
+    folderControllers[id] = { reset: function(){} };
+    if(removable){
+      card.querySelector("[data-remove]").addEventListener("click", function(){
+        delete folderControllers[id]; card.parentNode.removeChild(card); autosave();
+      });
+    }
+  }
+  document.getElementById("addFolderBtn").addEventListener("click", function(){ addFolder(null, true); autosave(); });
+
+  /* ================= Worksheet 2: components ================= */
+  function addComponent(id, removable){
+    id = id || ("comp" + (++componentCount));
+    var card = document.createElement("div");
+    card.className = "rcard";
+    card.innerHTML =
+      "<div class='rcard-head'><input type='text' data-field='" + id + "_name' placeholder='e.g. Navigation bar'>" +
+      (removable ? "<button class='rcard-remove no-print' type='button' data-remove>Remove</button>" : "") + "</div>" +
+      "<div class='rgrid2'>" +
+      "<div><label>Used on which pages?</label><input type='text' data-field='" + id + "_pages' placeholder='e.g. All pages'></div>" +
+      "<div><label>How will you build it once and reuse it?</label><input type='text' data-field='" + id + "_reuse' placeholder='e.g. copy-paste HTML block, shared CSS class'></div>" +
+      "</div>";
+    document.getElementById("k_components").appendChild(card);
+    componentControllers[id] = { reset: function(){} };
+    if(removable){
+      card.querySelector("[data-remove]").addEventListener("click", function(){
+        delete componentControllers[id]; card.parentNode.removeChild(card); autosave();
+      });
+    }
+  }
+  document.getElementById("addComponentBtn").addEventListener("click", function(){ addComponent(null, true); autosave(); });
+
+  /* ================= Worksheet 3: page tracker ================= */
+  function addPage(id, removable){
+    id = id || ("page" + (++pageCount));
+    var card = document.createElement("div");
+    card.className = "rcard";
+    card.innerHTML =
+      "<div class='rcard-head'><input type='text' data-field='" + id + "_name' placeholder='e.g. Home'>" +
+      (removable ? "<button class='rcard-remove no-print' type='button' data-remove>Remove</button>" : "") + "</div>" +
+      "<ul class='checklist'>" +
+      "<li><input type='checkbox' class='chk-input' data-field='" + id + "_chk_structure'> HTML structure/skeleton done</li>" +
+      "<li><input type='checkbox' class='chk-input' data-field='" + id + "_chk_content'> Content added</li>" +
+      "<li><input type='checkbox' class='chk-input' data-field='" + id + "_chk_styled'> Styled to match mock-up</li>" +
+      "<li><input type='checkbox' class='chk-input' data-field='" + id + "_chk_links'> Navigation links working</li>" +
+      "<li><input type='checkbox' class='chk-input' data-field='" + id + "_chk_tested'> Tested in the browser</li>" +
+      "</ul>" +
+      "<textarea data-field='" + id + "_notes' placeholder='Notes or issues for this page (optional)'></textarea>";
+    document.getElementById("p_pages").appendChild(card);
+    pageControllers[id] = { reset: function(){} };
+    if(removable){
+      card.querySelector("[data-remove]").addEventListener("click", function(){
+        delete pageControllers[id]; card.parentNode.removeChild(card); autosave();
+      });
+    }
+  }
+  document.getElementById("addPageBtn").addEventListener("click", function(){ addPage(null, true); autosave(); });
+
+  /* ================= Worksheet 4: evidence log (with optional screenshot) ================= */
+  function addEntry(id, removable){
+    id = id || ("entry" + (++entryCount));
+    var card = document.createElement("div");
+    card.className = "rcard";
+    card.innerHTML =
+      "<div class='rcard-head'><input type='text' data-field='" + id + "_date' placeholder='Date, e.g. Mon 17 Aug' style='max-width:220px'>" +
+      (removable ? "<button class='rcard-remove no-print' type='button' data-remove>Remove</button>" : "") + "</div>" +
+      "<div class='evi-thumb-wrap'><img class='evi-thumb-img' alt=''><span class='evi-thumb-hint no-print'>Screenshot (optional)</span></div>" +
+      "<div class='evi-actions no-print'>" +
+      "<button class='btn btn-add evi-upload-btn' type='button'>📷 Add screenshot</button>" +
+      "<input type='file' accept='image/*' class='evi-file-input' style='display:none'>" +
+      "<button class='btn btn-add evi-remove-thumb-btn' type='button'>🧹 Remove screenshot</button>" +
+      "</div>" +
+      "<div class='rgrid2'>" +
+      "<div class='full'><label>What did you work on?</label><textarea data-field='" + id + "_work'></textarea></div>" +
+      "<div class='full'><label>Any problem, and how did you solve it?</label><textarea data-field='" + id + "_problem' placeholder='Leave blank if nothing came up'></textarea></div>" +
+      "</div>";
+    document.getElementById("e_entries").appendChild(card);
+
+    var img = card.querySelector(".evi-thumb-img");
+    var hint = card.querySelector(".evi-thumb-hint");
+    var uploadBtn = card.querySelector(".evi-upload-btn");
+    var fileInput = card.querySelector(".evi-file-input");
+    var removeThumbBtn = card.querySelector(".evi-remove-thumb-btn");
+    var hasImage = false;
+
+    uploadBtn.addEventListener("click", function(){ fileInput.click(); });
+    fileInput.addEventListener("change", function(e){
+      var file = e.target.files[0];
+      if(!file) return;
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        img.src = ev.target.result; img.style.display = "block"; hint.style.display = "none";
+        hasImage = true; autosave();
+      };
+      reader.readAsDataURL(file);
+      e.target.value = "";
+    });
+    removeThumbBtn.addEventListener("click", function(){
+      img.src = ""; img.style.display = "none"; hint.style.display = "block";
+      hasImage = false; autosave();
+    });
+
+    entryControllers[id] = {
+      getState: function(){ return { hasImage: hasImage, imageData: hasImage ? img.src : null }; },
+      setState: function(state){
+        if(state && state.hasImage && state.imageData){
+          img.src = state.imageData; img.style.display = "block"; hint.style.display = "none"; hasImage = true;
+        }
+      },
+      reset: function(){ removeThumbBtn.click(); }
+    };
+    if(removable){
+      card.querySelector("[data-remove]").addEventListener("click", function(){
+        delete entryControllers[id]; card.parentNode.removeChild(card); autosave();
+      });
+    }
+  }
+  document.getElementById("addEntryBtn").addEventListener("click", function(){ addEntry(null, true); autosave(); });
+
+  /* ================= example data ================= */
+  var EXAMPLE_DATA = {
+    folder1_name: "index.html", folder1_desc: "The homepage — kept in the root folder so it loads by default.",
+    folder2_name: "pages/", folder2_desc: "About/Safety, Events & Hours, and Contact pages — one .html file each.",
+    folder3_name: "css/style.css", folder3_desc: "One shared stylesheet linked from every page, so colour/font changes only need to happen once.",
+    folder4_name: "images/", folder4_desc: "All photos and icons, named by what they show (e.g. hero-skatepark.jpg) rather than IMG_2384.jpg.",
+    f_naming: "All lowercase, words separated by hyphens, no spaces — e.g. events-hours.html, hero-skatepark.jpg. Keeps things consistent and avoids URL issues.",
+    f_version: "Saving a dated copy of the whole project folder to Google Drive at the end of each session (WSP-Website-17Aug etc.), and bumping a version number in a comment at the top of index.html each time I make a significant change.",
+
+    comp1_name: "Navigation bar", comp1_pages: "All pages", comp1_reuse: "Built once as an HTML block, copied into each page — same class names so one CSS rule styles it everywhere.",
+    comp2_name: "Footer", comp2_pages: "All pages", comp2_reuse: "Same approach as the nav — one HTML block, copied and linked to the shared stylesheet.",
+    comp3_name: "Event card", comp3_pages: "Events & Hours", comp3_reuse: "One repeatable HTML/CSS pattern (image + title + date), duplicated for each event listed.",
+
+    page1_name: "Home", page1_chk_structure: true, page1_chk_content: true, page1_chk_styled: true, page1_chk_links: false, page1_chk_tested: false,
+    page1_notes: "Structure and content done, styled to match the Option A mock-up. Still need to link the nav to the other two pages once they exist.",
+    page2_name: "About / Safety Rules", page2_chk_structure: true, page2_chk_content: false, page2_chk_styled: false, page2_chk_links: false, page2_chk_tested: false,
+    page2_notes: "Skeleton in place, reused the nav and footer components. Content and safety rules text still to come from Mike.",
+
+    entry1_date: "Mon 17 Aug", entry1_work: "Set up the folder structure and built the homepage skeleton using the nav and footer components.",
+    entry1_problem: "The footer looked fine on my laptop but the text overlapped on my phone. Fixed it by adding a max-width and letting the columns stack under 500px.",
+    entry2_date: "Wed 19 Aug", entry2_work: "Started the About/Safety Rules page and reused the nav component.",
+    entry2_problem: "Forgot to update the nav link's 'active' state for the new page — noticed while testing, fixed by adding a class to the current page's link."
+  };
+
+  function fillExample(){
+    forEachField(function(el, key){
+      if(!(key in EXAMPLE_DATA)) return;
+      var val = EXAMPLE_DATA[key];
+      if(el.type === "checkbox"){ el.checked = !!val; }
+      else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA"){ if(val) el.value = val; }
+      else { if(val) el.textContent = val; }
+    });
+    autosave();
+  }
+
+  function clearAll(){
+    forEachField(function(el){
+      if(el.type === "checkbox"){ el.checked = false; }
+      else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA"){ el.value = ""; }
+      else { el.textContent = ""; }
+    });
+    for(var e in entryControllers){ entryControllers[e].reset(); }
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(err){}
+    document.getElementById("saveNote").textContent = "Not saved yet";
+  }
+
+  /* ================= autosave / backup ================= */
+  function collectData(){
+    var fields = {};
+    forEachField(function(el, key){
+      if(el.type === "checkbox"){ fields[key] = el.checked; }
+      else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA"){ fields[key] = el.value; }
+      else { fields[key] = el.textContent; }
+    });
+    var entries = [];
+    for(var eid in entryControllers){ var s = entryControllers[eid].getState(); s.id = eid; entries.push(s); }
+    return {
+      fields: fields, entries: entries,
+      rowIds: {
+        folders: Object.keys(folderControllers),
+        components: Object.keys(componentControllers),
+        pages: Object.keys(pageControllers)
+      },
+      savedAt: new Date().toISOString()
+    };
+  }
+
+  function clearContainer(containerId, controllerMap){
+    document.getElementById(containerId).innerHTML = "";
+    for(var k in controllerMap){ delete controllerMap[k]; }
+  }
+
+  function applyData(data){
+    if(!data) return;
+    // wipe whatever default rows exist, then rebuild exactly from the saved data —
+    // additive-only restore would leave stale default rows behind after a row was removed pre-save
+    clearContainer("f_folders", folderControllers);
+    clearContainer("k_components", componentControllers);
+    clearContainer("p_pages", pageControllers);
+    clearContainer("e_entries", entryControllers);
+
+    var fIds = (data.rowIds && data.rowIds.folders) || [];
+    for(var fi=0; fi<fIds.length; fi++){ addFolder(fIds[fi], true); }
+    var cIds = (data.rowIds && data.rowIds.components) || [];
+    for(var ci=0; ci<cIds.length; ci++){ addComponent(cIds[ci], true); }
+    var pIds = (data.rowIds && data.rowIds.pages) || [];
+    for(var pi=0; pi<pIds.length; pi++){ addPage(pIds[pi], true); }
+    if(!data.rowIds && data.counts){
+      // backward compatibility with older backups saved before this fix
+      for(var n1=0;n1<(data.counts.folders||0);n1++){ addFolder(null, true); }
+      for(var n2=0;n2<(data.counts.components||0);n2++){ addComponent(null, true); }
+      for(var n3=0;n3<(data.counts.pages||0);n3++){ addPage(null, true); }
+    }
+    var entriesArr = data.entries || [];
+    for(var i=0;i<entriesArr.length;i++){ addEntry(entriesArr[i].id, true); }
+
+    if(data.fields){
+      forEachField(function(el, key){
+        if(!(key in data.fields)) return;
+        var val = data.fields[key];
+        if(el.type === "checkbox"){ el.checked = !!val; }
+        else if(el.tagName === "INPUT" || el.tagName === "TEXTAREA"){ el.value = val || ""; }
+        else { el.textContent = val || ""; }
+      });
+    }
+    for(var j=0;j<entriesArr.length;j++){
+      var eid2 = entriesArr[j].id;
+      if(entryControllers[eid2]){ entryControllers[eid2].setState(entriesArr[j]); }
+    }
+  }
+
+  var autosaveTimer = null;
+  function autosave(){
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      try{
+        var data = collectData();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        document.getElementById("saveNote").textContent = "Saved " + new Date(data.savedAt).toLocaleTimeString();
+      }catch(e){
+        document.getElementById("saveNote").textContent = "Could not save (storage may be full)";
+      }
+    }, 400);
+  }
+
+  function restoreFromStorage(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw);
+      applyData(data);
+      document.getElementById("saveNote").textContent = "Restored from " + new Date(data.savedAt).toLocaleTimeString();
+    }catch(e){ /* ignore corrupt storage */ }
+  }
+
+  function saveBackup(){
+    var data = collectData();
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Week3_Workbook_Backup_" + new Date().toISOString().slice(0,10) + ".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  function loadBackup(file){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      try{ applyData(JSON.parse(e.target.result)); autosave(); }
+      catch(err){ alert("Could not read that backup file."); }
+    };
+    reader.readAsText(file);
+  }
+
+  /* ================= toolbar wiring ================= */
+  document.getElementById("fillBtn").addEventListener("click", fillExample);
+  document.getElementById("clearBtn").addEventListener("click", function(){
+    if(confirm("Clear every field and screenshot on all four worksheets? This can't be undone.")){ clearAll(); }
+  });
+  document.getElementById("saveBackupBtn").addEventListener("click", saveBackup);
+  document.getElementById("loadBackupBtn").addEventListener("click", function(){ document.getElementById("backupFileInput").click(); });
+  document.getElementById("backupFileInput").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    if(file) loadBackup(file);
+    e.target.value = "";
+  });
+
+  document.addEventListener("input", function(e){
+    if(e.target.getAttribute && e.target.getAttribute("data-field")){ autosave(); }
+  });
+  document.addEventListener("change", function(e){
+    if(e.target.getAttribute && e.target.getAttribute("data-field")){ autosave(); }
+  });
+
+  /* ================= init ================= */
+  addFolder(null, true);
+  addFolder(null, true);
+  addFolder(null, true);
+  addComponent(null, true);
+  addComponent(null, true);
+  addPage(null, true);
+  addPage(null, true);
+  addPage(null, true);
+  addEntry(null, true);
+  addEntry(null, true);
+  restoreFromStorage();
+})();
+</script>
+</body>
+</html>
