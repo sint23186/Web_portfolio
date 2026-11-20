@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Hand-In &amp; Evidence Checklist — NCEA Digital Technologies</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%85%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1c2430; --paper:#ffffff; --bg:#eef1f6; --line:#d4dae3;
+  --a-col:#1e8e5a; --a-bg:#e7f6ee; --a-line:#bfe6cf;
+  --m-col:#1c5fc9; --m-bg:#e9f1ff; --m-line:#c2d8fb;
+  --e-col:#7a3ccb; --e-bg:#f2eafd; --e-line:#ddc8f7;
+  --accent:#0f6f5c; --accent2:#c96a1c;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Verdana,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header.top{background:linear-gradient(135deg,#0f6f5c,#124f8f);color:#fff;padding:18px 22px}
+header.top h1{margin:0 0 4px;font-size:1.4rem}
+header.top p{margin:0;opacity:.92;font-size:.92rem}
+.wrap{max-width:1180px;margin:0 auto;padding:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.idrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.field label{display:block;font-size:.75rem;font-weight:700;color:#4a5568;margin-bottom:3px;text-transform:uppercase;letter-spacing:.03em}
+.field input[type=text],.field input[type=date],.field select{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;font-size:.92rem;font-family:inherit}
+textarea{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:6px;font-size:.9rem;font-family:inherit;resize:vertical;min-height:60px}
+
+/* tabs */
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabbtn{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 16px;cursor:pointer;font-size:.92rem;font-weight:600;color:#4a5568}
+.tabbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+
+/* level selector */
+.levelbar{display:flex;gap:8px;margin-bottom:14px}
+.levelbtn{flex:1;background:#fff;border:2px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;text-align:left}
+.levelbtn b{display:block;font-size:1.02rem}
+.levelbtn span{font-size:.78rem;color:#64748b}
+.levelbtn.active{border-color:var(--accent);background:#eafaf4}
+
+.levelpanel{display:none}
+.levelpanel.active{display:block}
+
+.stdbox{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;margin-bottom:14px;background:#f9fafc;font-size:.88rem}
+.stdbox b{color:var(--accent)}
+
+.progresswrap{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.pbar{flex:1;min-width:160px}
+.pbar .lbl{display:flex;justify-content:space-between;font-size:.78rem;font-weight:700;margin-bottom:3px}
+.pbar .track{height:9px;background:#e5e9f0;border-radius:5px;overflow:hidden}
+.pbar .fill{height:100%;border-radius:5px;transition:width .2s}
+.pbar.a .fill{background:var(--a-col)}
+.pbar.m .fill{background:var(--m-col)}
+.pbar.e .fill{background:var(--e-col)}
+
+.sectionhead{display:flex;align-items:center;gap:8px;margin:18px 0 8px;font-weight:800;font-size:1rem}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.03em}
+.pill.a{background:var(--a-bg);color:var(--a-col);border:1px solid var(--a-line)}
+.pill.m{background:var(--m-bg);color:var(--m-col);border:1px solid var(--m-line)}
+.pill.e{background:var(--e-bg);color:var(--e-col);border:1px solid var(--e-line)}
+
+.reqrow{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px;background:#fff;cursor:pointer;transition:background .15s,box-shadow .15s}
+.reqrow:hover{box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.reqrow.a{border-left:5px solid var(--a-col)}
+.reqrow.m{border-left:5px solid var(--m-col)}
+.reqrow.e{border-left:5px solid var(--e-col)}
+.reqrow.done.a{background:var(--a-bg)}
+.reqrow.done.m{background:var(--m-bg)}
+.reqrow.done.e{background:var(--e-bg)}
+.reqrow.done .reqtext{color:#3a4556}
+.reqtop{display:flex;gap:10px;align-items:flex-start}
+.reqtop input[type=checkbox]{width:18px;height:18px;margin-top:2px;flex:none;cursor:pointer}
+.reqtext{flex:1;font-size:.92rem}
+.reqtext .donetick{font-weight:800;margin-right:4px}
+.reqrow.done .donetick{color:var(--a-col)}
+.reqways{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;font-size:.8rem}
+.reqways div{background:#f7f8fa;border-radius:6px;padding:7px 9px}
+.reqways b{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.02em;color:#64748b;margin-bottom:2px}
+.evidencerow{margin-top:8px}
+.evidencerow label{font-size:.72rem;font-weight:700;color:#64748b;display:block;margin-bottom:2px}
+.evidencerow input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:.85rem}
+
+.rubrichead{font-weight:800;color:var(--accent);margin:18px 0 6px;font-size:.98rem}
+.rubrictable{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.rubrictable .rhead{padding:8px 10px;font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.02em}
+.rubrictable .rhead.a{background:var(--a-bg);color:var(--a-col)}
+.rubrictable .rhead.m{background:var(--m-bg);color:var(--m-col)}
+.rubrictable .rhead.e{background:var(--e-bg);color:var(--e-col)}
+.rubrictable .rcell{background:#fff;padding:9px 10px;font-size:.82rem}
+.rubrictable .rcell ul{margin:0;padding-left:16px}
+.rubrictable .rcell li{margin-bottom:5px}
+
+/* Final submission form */
+.linksgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.headingblock{display:grid;grid-template-columns:1fr 230px;gap:10px;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px;background:#fff}
+.headingblock h3{margin:0 0 6px;font-size:1rem;color:var(--accent)}
+.margincol{display:flex;flex-direction:column;gap:6px}
+.marginfield{border-radius:6px;padding:6px 8px}
+.marginfield label{display:block;font-size:.68rem;font-weight:800;text-transform:uppercase;margin-bottom:2px}
+.marginfield.a{background:var(--a-bg);border:1px solid var(--a-line)}
+.marginfield.a label{color:var(--a-col)}
+.marginfield.m{background:var(--m-bg);border:1px solid var(--m-line)}
+.marginfield.m label{color:var(--m-col)}
+.marginfield.e{background:var(--e-bg);border:1px solid var(--e-line)}
+.marginfield.e label{color:var(--e-col)}
+.marginfield textarea{min-height:38px;border:none;background:transparent;padding:0;font-size:.78rem}
+@media (max-width:760px){.headingblock{grid-template-columns:1fr}}
+
+.testtablewrap{border:1px solid var(--line);border-radius:8px;padding:12px;margin:-6px 0 12px;background:#fdfefe}
+.testtable{border-collapse:collapse;width:100%;min-width:760px;font-size:.8rem}
+.testtable th{background:#f1f4f8;text-align:left;padding:6px 7px;font-size:.7rem;text-transform:uppercase;letter-spacing:.02em;color:#4a5568;border:1px solid var(--line)}
+.testtable td{border:1px solid var(--line);padding:3px;vertical-align:top}
+.testtable input[type=text],.testtable select{width:100%;border:none;padding:5px 6px;font-size:.8rem;font-family:inherit;background:transparent}
+.testtable input[type=text]:focus,.testtable select:focus{background:#f7faff;outline:1px solid var(--accent)}
+.testtable td.rownum{text-align:center;color:#8a94a6;font-weight:700}
+.testtable .rowdel{background:none;border:none;color:#b33;cursor:pointer;font-size:.9rem;padding:2px 6px}
+.testtable select.res-pass{color:var(--a-col);font-weight:700}
+.testtable select.res-fail{color:#b33;font-weight:700}
+.testtable select.res-partial{color:var(--accent2);font-weight:700}
+.emptytest{color:#8a94a6;font-size:.82rem;padding:8px 2px}
+
+.declare{display:flex;gap:10px;align-items:flex-start;background:#fff7e8;border:1px solid #f0d9a8;border-radius:8px;padding:12px;margin-top:10px}
+.declare input{margin-top:3px}
+
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:.88rem;font-weight:700;cursor:pointer}
+button.btn.secondary{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+button.btn.warn{background:#fff;color:#b33;border:1px solid #e3a}
+footer{text-align:center;color:#7c8798;font-size:.78rem;padding:22px 10px 30px}
+
+.toast{position:fixed;bottom:18px;right:18px;background:#1c2430;color:#fff;padding:10px 16px;border-radius:8px;font-size:.85rem;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:translateY(0)}
+
+.modalbg{position:fixed;inset:0;background:rgba(15,20,30,.55);display:none;align-items:center;justify-content:center;z-index:998;padding:16px}
+.modalbg.show{display:flex}
+.modal{background:#fff;border-radius:10px;padding:20px;max-width:420px;width:100%}
+.modal h3{margin-top:0}
+.modal .btnrow{justify-content:flex-end}
+
+/* compiled / print doc */
+#compiledDoc{display:none}
+.covertitle{text-align:center;margin-bottom:20px}
+.covertitle h1{margin:0 0 4px;font-size:1.5rem}
+.covertitle p{margin:0;color:#555}
+.coverdetails{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;border:1px solid #ccc;border-radius:8px;padding:12px 16px;margin-bottom:18px;font-size:.92rem}
+.doc-heading{margin:22px 0 8px;font-size:1.1rem;border-bottom:2px solid var(--accent);padding-bottom:3px}
+.doc-block{display:grid;grid-template-columns:1fr 230px;gap:14px;margin-bottom:10px;align-items:start}
+.doc-body{font-size:.92rem;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
+.doc-margin div{border-radius:6px;padding:6px 8px;font-size:.75rem;margin-bottom:6px;white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word}
+.doc-margin .a{background:var(--a-bg);border:1px solid var(--a-line)}
+.doc-margin .m{background:var(--m-bg);border:1px solid var(--m-line)}
+.doc-margin .e{background:var(--e-bg);border:1px solid var(--e-line)}
+.doc-margin b{display:block;font-size:.65rem;text-transform:uppercase}
+.doc-checklist{font-size:.85rem}
+.doc-checklist .g{color:var(--a-col)}
+.doc-checklist .r{color:#b33}
+.doc-testtable{border-collapse:collapse;width:100%;font-size:.78rem;margin:8px 0 4px}
+.doc-testtable th{background:#f1f4f8;text-align:left;padding:5px 6px;font-size:.68rem;text-transform:uppercase;color:#4a5568;border:1px solid #d4dae3}
+.doc-testtable td{border:1px solid #d4dae3;padding:5px 6px;vertical-align:top}
+.doc-testtable td.dt-pass{color:var(--a-col)}
+.doc-testtable td.dt-partial{color:var(--accent2)}
+.doc-testtable td.dt-fail{color:#b33}
+
+.archivebar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.breadcrumb{font-size:.85rem;color:#4a5568;margin:6px 0 10px;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.breadcrumb span.crumb{cursor:pointer;color:var(--accent);font-weight:700}
+.breadcrumb span.crumb:hover{text-decoration:underline}
+.breadcrumb .sep{color:#aaa}
+.filegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:6px;min-height:60px}
+.fileitem{border:2px solid var(--line);border-radius:8px;padding:12px 8px 8px;text-align:center;cursor:pointer;background:#fff;font-size:.78rem;word-break:break-word;user-select:none}
+.fileitem:hover{box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.fileitem.selected{border-color:var(--accent);background:#eafaf4}
+.fileitem .ficon{font-size:1.9rem;display:block;margin-bottom:4px}
+.fileitem .fimeta{color:#8a94a6;font-size:.66rem;margin-top:3px}
+.emptyhint{color:#8a94a6;font-size:.85rem;padding:18px 4px}
+.modal.wide{max-width:700px}
+.previewbody{max-height:58vh;overflow:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0;background:#fafbfc}
+.previewbody img{max-width:100%;display:block;margin:0 auto}
+.previewbody iframe{width:100%;height:52vh;border:none;background:#fff}
+.previewbody pre{white-space:pre-wrap;padding:10px;margin:0;font-size:.82rem}
+
+@media print{
+  header.top,.tabbar,.levelbar,.btnrow,.toast,.modalbg,footer,.progresswrap{display:none !important}
+  body{background:#fff}
+  .wrap{max-width:100%;padding:0}
+  .card{box-shadow:none;border:none;padding:0}
+  #compiledDoc{display:block !important}
+  .app-live{display:none !important}
+  /* CSS Grid does not reliably break across printed pages — a grid box taller
+     than one page gets clipped rather than continuing overleaf. Stack the
+     body and margin notes vertically for print so nothing is ever cut off. */
+  .doc-block{display:block !important}
+  .doc-margin{display:block;margin-top:6px}
+  .doc-margin div{page-break-inside:avoid;break-inside:avoid}
+  .doc-body,.doc-margin,.doc-checklist,.coverdetails,.rubrictable{overflow:visible !important;max-height:none !important;height:auto !important}
+  .doc-testtable{overflow:visible !important}
+  .doc-testtable tr{page-break-inside:avoid;break-inside:avoid}
+  .doc-testtable thead{display:table-header-group}
+  .doc-heading{page-break-after:avoid;break-after:avoid}
+  .covertitle,.coverdetails{page-break-inside:avoid}
+  * {-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>📋 Final Hand-In &amp; Evidence Checklist</h1>
+  <p>NCEA Digital Technologies — Website Development Portfolio · Level 1, 2 &amp; 3</p>
+</header>
+
+<div class="wrap app-live">
+
+  <div class="card">
+    <div class="idrow">
+      <div class="field"><label>Student name</label><input type="text" id="s_name" data-save="1"></div>
+      <div class="field"><label>Class</label><input type="text" id="s_class" data-save="1"></div>
+      <div class="field"><label>Teacher</label><input type="text" id="s_teacher" data-save="1" value="Sam McGuire"></div>
+      <div class="field"><label>Submission date</label><input type="date" id="s_date" data-save="1"></div>
+    </div>
+  </div>
+
+  <div class="levelbar" id="levelBar">
+    <div class="levelbtn" data-level="1"><b>Level 1</b><span>AS92005 · Develop a digital technologies outcome</span></div>
+    <div class="levelbtn" data-level="2"><b>Level 2</b><span>AS91897 + AS91891 · 9-credit combo</span></div>
+    <div class="levelbtn" data-level="3"><b>Level 3</b><span>AS91907 + AS91901 · 9-credit combo</span></div>
+  </div>
+  <div style="margin-bottom:14px">
+    <button class="btn secondary" id="btnViewExample">📘 View Worked Example (Excellence) — this level</button>
+  </div>
+
+  <div class="tabbar" id="tabBar">
+    <button class="tabbtn active" data-tab="checklist">Evidence Checklist</button>
+    <button class="tabbtn" data-tab="rubric">Marking Rubric</button>
+    <button class="tabbtn" data-tab="archive">Evidence Archive</button>
+    <button class="tabbtn" data-tab="submission">Final Submission Form</button>
+    <button class="tabbtn" data-tab="export">Compile &amp; Print / Export</button>
+  </div>
+
+  <!-- ===================== CHECKLIST TAB ===================== -->
+  <div class="tabpanel active" id="tab-checklist">
+    <p style="font-size:.78rem;color:#8a94a6;margin:0 0 8px">NCEA grades are cumulative — Merit requires the Achievement criteria to also be met, and Excellence requires both Achievement and Merit. Ticking off an Excellence box alone doesn't earn Excellence.</p>
+    <div class="progresswrap" id="progressWrap"></div>
+    <div id="levelPanels"></div>
+  </div>
+
+  <!-- ===================== MARKING RUBRIC TAB ===================== -->
+  <div class="tabpanel" id="tab-rubric">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+        <p style="font-size:.85rem;color:#4a5568;margin:0;max-width:640px">A quick-reference rubric for the standard(s) at this level. This is not the official NZQA marking schedule. Remember grades are cumulative: Excellence can only be awarded if the Achievement and Merit criteria are also met.</p>
+        <div class="btnrow" style="margin-top:0">
+          <button class="btn secondary" id="btnRubricJson">Export rubrics (.json)</button>
+          <button class="btn secondary" id="btnRubricCsv">Export rubrics (.csv)</button>
+        </div>
+      </div>
+      <div id="rubricHost" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <!-- ===================== EVIDENCE ARCHIVE TAB ===================== -->
+  <div class="tabpanel" id="tab-archive">
+    <div class="card">
+      <div class="sectionhead">🗂️ Evidence Archive — Student Submission Folder</div>
+      <p style="font-size:.85rem;color:#4a5568;margin-top:0">Upload evidence here — it's stored as base64 inside your browser (IndexedDB) in a submission folder with a <code>submission.html</code> report and an <code>assets</code> subfolder. Nothing leaves this device unless you download a file. Double-click a folder to open it, double-click a file to preview it.</p>
+      <div class="archivebar">
+        <button class="btn secondary" id="arcNewFolder">📁 New Folder</button>
+        <button class="btn secondary" id="arcUpload">⬆ Upload File(s)</button>
+        <input type="file" id="arcFileInput" multiple style="display:none">
+        <button class="btn secondary" id="arcNewNote">📝 New Note</button>
+        <button class="btn" id="arcArchiveReport">📄 Archive Submission Report</button>
+        <button class="btn secondary" id="arcRename" disabled>Rename</button>
+        <button class="btn secondary" id="arcDownload" disabled>Download</button>
+        <button class="btn secondary" id="arcDownloadZip">⬇ Download Full Archive (.zip)</button>
+        <button class="btn warn" id="arcDelete" disabled>Delete</button>
+      </div>
+      <div class="breadcrumb" id="arcBreadcrumb"></div>
+      <div class="filegrid" id="arcGrid"></div>
+    </div>
+  </div>
+
+  <!-- ===================== FINAL SUBMISSION FORM TAB ===================== -->
+  <div class="tabpanel" id="tab-submission">
+    <div class="card">
+      <div class="sectionhead">🔗 Links for your submission</div>
+      <div class="linksgrid">
+        <div class="field"><label>Hosted website / live link</label><input type="text" id="lnk_site" data-save="1" placeholder="https://..."></div>
+        <div class="field"><label>GitHub / repository link</label><input type="text" id="lnk_repo" data-save="1" placeholder="https://github.com/..."></div>
+        <div class="field"><label>Design files (Figma / draw.io)</label><input type="text" id="lnk_design" data-save="1" placeholder="https://..."></div>
+        <div class="field"><label>Video / audio evidence (if used)</label><input type="text" id="lnk_video" data-save="1" placeholder="https://..."></div>
+        <div class="field"><label>Other evidence / folder link</label><input type="text" id="lnk_other" data-save="1" placeholder="https://..."></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sectionhead">📝 Report — write your content, then note where Achievement / Merit / Excellence evidence sits alongside each heading</div>
+      <div id="headingBlocks"></div>
+    </div>
+
+    <div class="card">
+      <div class="declare">
+        <input type="checkbox" id="declareCheck" data-save="1">
+        <div>
+          <b>Student declaration</b><br>
+          <span style="font-size:.85rem">I confirm this is my own work, produced without unauthorised help or generative AI content generation, and that the evidence linked above is accurate and belongs to me.</span>
+          <div class="idrow" style="margin-top:8px">
+            <div class="field"><label>Typed signature (full name)</label><input type="text" id="declareSig" data-save="1"></div>
+            <div class="field"><label>Date</label><input type="date" id="declareDate" data-save="1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXPORT TAB ===================== -->
+  <div class="tabpanel" id="tab-export">
+    <div class="card">
+      <div class="sectionhead">📄 Compile the finished evidence document</div>
+      <p style="font-size:.9rem;color:#4a5568">This pulls everything above into one printable document: a cover page with your details and links, then each report heading with your writing and the Achievement / Merit / Excellence evidence notes laid out beside it, and a summary of your checklist. Use <b>Print / Save as PDF</b> to hand it in.</p>
+      <div class="btnrow">
+        <button class="btn" id="btnBuildCompiled">Build compiled document below</button>
+        <button class="btn secondary" id="btnPrint">Print / Save as PDF</button>
+        <button class="btn secondary" id="btnExportHtml">Export Submission Report (.html)</button>
+      </div>
+    </div>
+    <div class="card" id="compiledPreviewCard" style="display:none">
+      <div id="compiledPreview"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sectionhead">💾 Save your work</div>
+    <p style="font-size:.85rem;color:#4a5568">Your work autosaves to this device. Export a backup file to keep with your evidence, or to move to another computer.</p>
+    <div class="btnrow">
+      <button class="btn secondary" id="btnExportJson">Export backup (.standardsubmit)</button>
+      <button class="btn secondary" id="btnImportJson">Import backup (.standardsubmit)</button>
+      <input type="file" id="fileImport" accept=".standardsubmit" style="display:none">
+      <button class="btn warn" id="btnReset">Reset all data</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= COMPILED PRINT DOCUMENT (built by JS) ================= -->
+<div class="wrap" id="compiledDoc"></div>
+
+<footer class="app-live">Developed by Sam McGuire 2026</footer>
+
+<div class="toast" id="toast"></div>
+<div class="modalbg" id="resetModal">
+  <div class="modal">
+    <h3>Reset all data?</h3>
+    <p>This clears every field on this device and cannot be undone. Export a backup first if you're not sure.</p>
+    <div class="btnrow">
+      <button class="btn secondary" id="resetCancel">Cancel</button>
+      <button class="btn warn" id="resetConfirm">Yes, reset everything</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalbg" id="arcPromptModal">
+  <div class="modal">
+    <h3 id="arcPromptTitle">New Folder</h3>
+    <div class="field"><label id="arcPromptLabel">Name</label><input type="text" id="arcPromptInput"></div>
+    <p id="arcPromptError" style="color:#b33;font-size:.82rem;display:none">Please enter a valid name.</p>
+    <div class="btnrow">
+      <button class="btn secondary" id="arcPromptCancel">Cancel</button>
+      <button class="btn" id="arcPromptOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalbg" id="arcNoteModal">
+  <div class="modal">
+    <h3>New Note</h3>
+    <div class="field"><label>File name</label><input type="text" id="arcNoteName" placeholder="e.g. feedback-notes.txt"></div>
+    <div class="field" style="margin-top:8px"><label>Content</label><textarea id="arcNoteBody" style="min-height:120px"></textarea></div>
+    <div class="btnrow">
+      <button class="btn secondary" id="arcNoteCancel">Cancel</button>
+      <button class="btn" id="arcNoteOk">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalbg" id="arcDeleteModal">
+  <div class="modal">
+    <h3>Delete this item?</h3>
+    <p id="arcDeleteText">This will permanently remove it (and everything inside it, if it's a folder).</p>
+    <div class="btnrow">
+      <button class="btn secondary" id="arcDeleteCancel">Cancel</button>
+      <button class="btn warn" id="arcDeleteConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalbg" id="arcPreviewModal">
+  <div class="modal wide">
+    <h3 id="arcPreviewTitle">Preview</h3>
+    <div class="previewbody" id="arcPreviewBody"></div>
+    <div class="btnrow">
+      <button class="btn secondary" id="arcPreviewClose">Close</button>
+      <button class="btn" id="arcPreviewDownload">Download</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalbg" id="exampleModal">
+  <div class="modal wide">
+    <h3 id="exampleTitle">Worked Example</h3>
+    <div class="previewbody" id="exampleBody" style="max-height:70vh"></div>
+    <div class="btnrow">
+      <button class="btn secondary" id="exampleClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Final Hand-In & Evidence Checklist — NCEA Digital Technologies
+   Developed by Sam McGuire 2026 — single-file, offline, ES5
+   ============================================================ */
+var STORAGE_KEY = 'nceaHandinChecklist_v1';
+var APP = { level: 1 };
+
+/* ---------- Standard + requirement data ---------- */
+var STANDARDS = {
+  1: {
+    code:'AS92005', title:'Develop a digital technologies outcome', credits:5, assess:'Internal',
+    note:'Evidence for this standard is usually kept short — around 5 A4 pages, or up to 3 minutes of audio/video, with the outcome itself as the main evidence. Choose your best evidence rather than including everything.',
+    req: {
+      a:[
+        {t:'Describe the purpose of your website, who it is for, and what it needs to do and include (requirements &amp; specifications).',
+          code:'A README or intro comment stating the site purpose; page/file names that reflect the purpose.',
+          paper:'A short purpose &amp; audience paragraph, plus a bullet list of requirements and specifications.'},
+        {t:'Use appropriate tools and techniques to produce a working website that meets those requirements.',
+          code:'Finished HTML/CSS(/JS) files; every listed requirement is actually present on the site.',
+          paper:'Screenshots of each finished page; a table matching each requirement to where it is met.'},
+        {t:'Test the website yourself and record what you found.',
+          code:'Fixes visible in the code; no obvious errors when the site is opened.',
+          paper:'A simple testing table: what you tested → what happened → what you fixed.'}
+      ],
+      m:[
+        {t:'Get feedback partway through (teacher, peer or user) and use it to improve the site.',
+          code:'An earlier version and a later version showing a change made because of feedback.',
+          paper:'A feedback log: who gave it, what they said, what you changed.'},
+        {t:'Explain how your design decisions improved the quality of the finished site.',
+          code:'Comments explaining why a layout, colour or navigation choice was made.',
+          paper:'A short paragraph explaining 2–3 key design decisions and why they helped.'}
+      ],
+      e:[
+        {t:'Justify how the finished website is fit for purpose for its users.',
+          code:'Reference specific working features that meet the identified user needs.',
+          paper:'A justification paragraph linking features back to the purpose and users.'},
+        {t:'Trial the site with a real user and show how their feedback shaped the final version.',
+          code:'The final version reflects a change made after the trial.',
+          paper:'Trial notes or photos, plus a short note on what changed as a result.'}
+      ]
+    }
+  },
+  2: {
+    code:'AS91897', title:'Use advanced processes to develop a digital technologies outcome', credits:6, assess:'Internal',
+    note:'At Level 2, evidence should show a genuine process — not just a finished site — including how you managed the project and what implications you considered. Submitted as a combined portfolio with the design/iterative-process standard below.',
+    req: {
+      a:[
+        {t:'Use advanced processes (e.g. project management, version control) to develop a working website that meets the brief.',
+          code:'Commit history or clearly version-numbered files; reusable components or functions.',
+          paper:'A project plan, milestone log or Gantt chart, plus a brief/requirements document.'},
+        {t:'Test the site so it functions as intended across devices and browsers.',
+          code:'Responsive CSS; no console errors; valid HTML/CSS.',
+          paper:'A cross-device/browser testing log with screenshots.'}
+      ],
+      m:[
+        {t:'Identify and explain at least two relevant implications (accessibility, privacy, cultural, legal/copyright, sustainability, end-user wellbeing) and show how the site addresses them.',
+          code:'Alt text, ARIA labels, credited/licensed assets, secure form handling.',
+          paper:'An implications table: implication → how it was addressed → evidence.'},
+        {t:'Use project management and/or version control tools to manage development.',
+          code:'A commit log or version history with meaningful messages.',
+          paper:'A screenshot of your project tracker or Git log, with a short explanation.'}
+      ],
+      e:[
+        {t:'Use information from testing AND trialling with real users to improve the site\'s functionality.',
+          code:'A before/after change made directly because of trialling.',
+          paper:'A trial log: participant, feedback, change made, why it improved fitness for purpose.'},
+        {t:'Show a refined, well-structured outcome with evidence of iterative improvement over time.',
+          code:'Clean, commented, consistently structured code across the whole site.',
+          paper:'A short reflection tying together how the outcome was refined over the project.'}
+      ]
+    },
+    second:{
+      code:'AS91891', title:'Apply conventions to develop a design for a digital technologies outcome', credits:3, tag:'Design & Iterative Process',
+      note:'Required alongside AS91897 for this portfolio. This is where iterative improvement is evidenced directly: an initial design, feedback from modelling/end users, and a revised design in response.',
+      req:{
+        a:[{t:'Apply relevant conventions to develop a design (wireframes/mockups) and identify at least two relevant implications for it.',
+            code:'Wireframes/mockups saved as versioned files; comments noting the convention followed.',
+            paper:'Design brief with conventions listed (layout, navigation, colour, typography) and implications identified.'}],
+        m:[{t:'Use feedback from modelling (peers, users, teacher) to iterate and improve the design.',
+            code:'A "v1" and "v2" design file showing a visible change.',
+            paper:'A feedback log: who gave it, what it said, and the resulting design change — this is the core iterative-process evidence.'},
+           {t:'Explain how the design uses relevant conventions and addresses the identified implications.',
+            code:'Comments linking a design choice to a convention or implication.',
+            paper:'A short paragraph explaining 2–3 design choices and the conventions/implications behind them.'}],
+        e:[{t:'Justify how the developed design addresses implications, end-user requirements, and conventions.',
+            code:'Final design file reflecting the justified choices.',
+            paper:'A justification paragraph tying the final design back to users, implications and conventions, supported by evidence from tests/trials/consultation.'}]
+      }
+    }
+  },
+  3: {
+    code:'AS91907', title:'Use complex processes to develop a digital technologies outcome', credits:6, assess:'Internal',
+    note:'At Level 3, expect greater depth: more complex features, a more sophisticated process, and thorough justification of the choices you made.',
+    req: {
+      a:[
+        {t:'Use complex processes to develop a working, complex website that meets the brief.',
+          code:'Advanced features (e.g. dynamic content, validated forms, APIs, CMS integration); a clearly structured file/folder architecture.',
+          paper:'Brief, requirements &amp; specifications, and a short justification of the complexity of your approach.'},
+        {t:'Test the site so it functions as intended.',
+          code:'Cross-browser/device testing; validated code; visible error handling.',
+          paper:'A testing log with evidence — screenshots, validator reports, etc.'}
+      ],
+      m:[
+        {t:'Identify, explain and justify at least two relevant implications in depth, including alternatives considered.',
+          code:'Accessibility/privacy/security features implemented and justified in comments.',
+          paper:'An in-depth implications discussion that justifies the approach taken.'},
+        {t:'Use sophisticated project management and/or version control to manage a complex build.',
+          code:'Full commit/version history across the project (branches if used).',
+          paper:'Project management evidence (timeline, risk log, milestones) with reflection.'}
+      ],
+      e:[
+        {t:'Use testing and trialling with others to make significant, well-justified improvements, showing a robust and flexible outcome.',
+          code:'Evidence of handling edge cases / robust error handling.',
+          paper:'A trial log with participant feedback and justified before/after changes.'},
+        {t:'Provide a well-reasoned justification for the techniques and approach chosen, including alternatives you considered and rejected.',
+          code:'N/A — this is a written justification, though it can reference specific technical choices.',
+          paper:'A justification paragraph: why this approach compared with the alternatives.'}
+      ]
+    },
+    second:{
+      code:'AS91901', title:'Apply user experience methodologies to develop a design for a digital technologies outcome', credits:3, tag:'Design & Iterative Process',
+      note:'Required alongside AS91907 for this portfolio. UX research and iterative design work (personas, user testing of wireframes, refined through feedback) submitted as the design standard alongside the build standard.',
+      req:{
+        a:[{t:'Apply UX methodologies (user research, personas, wireframes) to design the outcome.',
+            code:'Wireframes/mockups produced from research, saved as versioned files.',
+            paper:'User research notes, personas, and a purpose/requirements summary.'}],
+        m:[{t:'Use UX research and feedback from modelling to iterate the design, developing an informed design.',
+            code:'A "v1" and "v2" design file showing a visible, research-driven change.',
+            paper:'A short justification linking each design choice to specific user research or feedback — the core iterative-process evidence.'}],
+        e:[{t:'Develop a refined design, validated and improved through user testing, and justify how it addresses user needs.',
+            code:'Final design iteration reflecting user-testing feedback.',
+            paper:'A user-testing log with before/after design evidence and a justification paragraph.'}]
+      }
+    }
+  }
+};
+
+var LEVEL_LABELS = {a:'Achievement', m:'Achievement with Merit', e:'Achievement with Excellence'};
+var LEVEL_KEYS = ['a','m','e'];
+
+/* ---------- Final submission form headings ---------- */
+var HEADINGS = [
+  {id:'h_purpose', title:'1. Purpose, Users &amp; Requirements', hint:'Who is this website for, what does it need to do, and what are the requirements/specifications?'},
+  {id:'h_design', title:'2. Design', hint:'Wireframes, mockups, sitemap, UX research, and the brief you designed to.'},
+  {id:'h_dev', title:'3. Development Evidence', hint:'How you built it — techniques used, tools, version control, project management.'},
+  {id:'h_impl', title:'4. Implications Considered', hint:'Accessibility, privacy, cultural, legal/copyright, sustainability, end-user wellbeing.'},
+  {id:'h_test', title:'5. Testing &amp; Trialling', hint:'What you tested, who trialled it, and what happened.'},
+  {id:'h_reflect', title:'6. Reflection &amp; Justification', hint:'Why the finished site is fit for purpose; justification of choices made.'}
+];
+
+/* ---------- Worked examples (fictional, written to Excellence standard) ---------- */
+var EXAMPLES = {
+  1: {
+    student:'Manaia Ropata', project:'Kaimoana Kai — a website for a local fish &amp; chip shop', standard:'AS92005 (Level 1)',
+    headings:{
+      h_purpose:'Kaimoana Kai is a small, family-run fish &amp; chip shop in Wainuiomata. The owners asked for a simple website so customers can check the menu and opening hours without ringing the shop, especially on Friday nights when the phone is busy. Users are mostly local families and older customers, some on mobile phones with slow data, so the site needed to be fast, easy to read, and work without scrolling sideways. Requirements: a home page with the shop\'s story, a menu page with prices, an opening-hours/location page with an embedded map, and a contact page. All pages needed to look the same (same header/footer) and load quickly on a phone.',
+      h_design:'I sketched three pages on paper first (home, menu, contact) and showed them to the shop owner, Mrs Ropata. She asked for the menu to be the first thing people see, not the story, because that\'s what most customers actually want — so I swapped the home page layout: menu highlights at the top, story below. I kept navy and white to match their existing shop sign and logo.',
+      h_dev:'I built the site in plain HTML, CSS and a small amount of JavaScript (for a mobile nav menu that opens/closes) using VS Code, with each page as a separate .html file sharing one style.css. I used a CSS Flexbox layout for the menu cards so they stack neatly on a phone screen instead of overflowing. Filenames (index.html, menu.html, contact.html) and comments in the code describe what each section does.',
+      h_impl:'Not formally required for this standard, but I kept it in mind: I used a large, high-contrast font for the menu prices since a lot of customers are older, and every image has alt text describing the dish for anyone using a screen reader.',
+      h_test:'I tested every page on my phone and a school Chromebook, checking the menu wasn\'t cut off and the nav menu opened/closed properly. I found the map on the contact page overflowed the screen on mobile — I fixed this by adding a max-width and setting the iframe to 100% width. I also asked two classmates to click through the site and tell me if anything confused them; one said the "order by phone" number wasn\'t obvious enough, so I made it a large tap-to-call button at the top of the menu page.',
+      h_reflect:'The finished site is fit for purpose because it does exactly what Mrs Ropata asked for: customers can see the menu and prices without ringing during the Friday rush, and the tap-to-call button (added after real trial feedback) makes ordering faster for people who still want to order over the phone. Swapping the home-page order after her feedback, and enlarging the phone-number button after a user trial, both directly improved how well the site serves its actual users — which is why I\'d say it\'s not just working, but refined to fit this specific shop and its customers.'
+    },
+    margins:{
+      h_purpose:{a:'requirements.docx — bullet list of the four pages and why each is needed', m:'—', e:'—'},
+      h_design:{a:'wireframes.pdf — 3 hand-drawn page sketches', m:'feedback-log.docx: "Mrs Ropata, 14/3 — swap menu &amp; story order" + before/after screenshots', e:'—'},
+      h_dev:{a:'index.html / menu.html / contact.html — working pages meeting every requirement', m:'style.css comments explaining the Flexbox menu-card layout choice', e:'—'},
+      h_test:{a:'testing-log.docx — device-by-device checklist with screenshots', m:'feedback-log.docx: classmate trial notes, 2 issues found and fixed', e:'trial-notes.pdf — phone-button change made directly from a real user (classmate) trial'},
+      h_reflect:{a:'—', m:'—', e:'justification paragraph above, linking 2 features back to specific user needs and trial evidence'}
+    },
+    testRows:[
+      {test:'Menu page on phone screen (iPhone SE width)', tester:'Self', expected:'Menu cards stack in one column, no horizontal scroll', actual:'Cards overflowed off the right edge', result:'Fail', fix:'Added max-width:100% and Flexbox wrap to the menu-card CSS'},
+      {test:'Mobile nav menu open/close button', tester:'Self', expected:'Menu opens and closes on tap', actual:'Worked as expected on Chromebook and phone', result:'Pass', fix:'—'},
+      {test:'Contact page map on mobile', tester:'Peer', expected:'Map fits inside the screen width', actual:'Map overflowed, page scrolled sideways', result:'Fail', fix:'Added max-width and set the map iframe to width:100%'},
+      {test:'Full site walkthrough — can a customer find the menu and order?', tester:'Real end user', expected:'Classmate finds the menu and phone number within 10 seconds', actual:'Found the menu quickly but didn\u2019t notice the phone number was tappable', result:'Partial', fix:'Enlarged the phone number into a tap-to-call button at the top of the menu page'}
+    ]
+  },
+  2: {
+    student:'Jayden Fa\'alogo', project:'Hutt Valley Skate Collective — a community website for a local skate crew', standard:'AS91897 + AS91891 (Level 2 combo)',
+    headings:{
+      h_purpose:'The Hutt Valley Skate Collective needed a website to advertise their weekly meet-ups, show photos/videos from sessions, and let new skaters find out where and when to turn up. Primary users are teenagers and young adults, mostly on mobile, plus a few parents checking it\'s legitimate and safe. Requirements &amp; specifications: an events page with a schedule that\'s easy to update, a media gallery, a "getting started" page for beginners, and a contact form — all in a skate-culture visual style the crew actually likes, not a generic template.',
+      h_design:'I applied convention research from other skate crew and sports club sites (bold typography, high-contrast dark theme, large tappable buttons) to a first wireframe set. I modelled this v1 design with three crew members and got feedback: they said the dark theme looked "sick" but the event schedule was buried at the bottom — most visitors just want to know when the next session is. I revised the layout so the schedule sits directly under the header on every page (v2), which is a direct, evidenced example of using feedback from modelling to iterate the design, addressing both the identified implication (fast, low-friction access to information on mobile data) and the convention of clear primary-action placement.',
+      h_dev:'Built with HTML/CSS/JS and a small vanilla-JS component for the events list (data stored in a JS array so it\'s easy for a non-coder crew member to update dates without touching HTML). I used Git with small, meaningful commits (e.g. "add mobile nav", "fix gallery overflow on iPhone SE") so the build has a traceable history, and a simple Trello board to sequence tasks against a two-week deadline the crew set me.',
+      h_impl:'Two implications I identified and addressed: (1) Accessibility — skate footage/photos have alt text and captions, and text contrast meets WCAG AA so it\'s readable in bright sunlight on a phone outdoors, which is realistically how most users will view it; (2) Privacy — the contact form only asks for a first name and email (not full details), and I added a short note on the form explaining why, since several crew members were uncomfortable with a form collecting more than that from minors.',
+      h_test:'Tested across Chrome, Safari and Firefox and on three different screen sizes (my phone, a tablet, a laptop) — found and fixed a gallery grid that broke on very small screens (iPhone SE width) using CSS grid-template-columns with auto-fit/minmax instead of a fixed column count. I then trialled the live site with five crew members at an actual session: two couldn\'t find the "getting started" page from the home page, so I added it to the main nav instead of burying it in the footer — a second, later refinement driven directly by real-user trialling, on top of the earlier design-stage change.',
+      h_reflect:'The outcome is refined, not just functional: it went through two separate rounds of real feedback — one at the design/wireframe stage (schedule placement) and one after building, from live trialling with users (getting-started page visibility) — and both changes are traceable to specific comments from specific people. The implications work wasn\'t bolted on afterwards either; the privacy decision on the contact form came directly from a crew member\'s concern, which is exactly the kind of end-user-driven, informed decision-making Merit and Excellence are looking for.'
+    },
+    margins:{
+      h_purpose:{a:'brief.docx + requirements list, agreed with the crew at kickoff meeting', m:'—', e:'—'},
+      h_design:{a:'wireframes-v1.pdf', m:'modelling-feedback.docx: 3 crew comments on v1, dated', e:'wireframes-v2.pdf compared side-by-side with v1 in design-iteration.pdf, explaining the change'},
+      h_dev:{a:'Git commit log (12 commits) + Trello board screenshot', m:'project-plan.docx — two-week milestone breakdown', e:'—'},
+      h_impl:{a:'—', m:'implications-table.docx: accessibility + privacy, each with what was done and why', e:'privacy decision traced directly to a crew member\'s comment in modelling-feedback.docx'},
+      h_test:{a:'cross-device-testing.docx with screenshots (Chrome/Safari/Firefox × 3 screen sizes)', m:'—', e:'trial-log.docx: live session trial with 5 users, nav-menu fix made as a direct result'}
+    },
+    testRows:[
+      {test:'Site loads and displays correctly in Chrome, Safari, Firefox', tester:'Self', expected:'Layout identical across all three browsers', actual:'Matched in Chrome/Firefox; Safari showed a gap under the gallery', result:'Partial', fix:'Added a Safari-specific flex-gap fallback rule'},
+      {test:'Gallery grid on very small screens (iPhone SE, 375px)', tester:'Self', expected:'Photos resize to fit without overflow', actual:'Grid broke into a single unreadable column with overflow', result:'Fail', fix:'Switched to grid-template-columns: auto-fit, minmax(120px,1fr)'},
+      {test:'Wireframe v1 walkthrough with 3 crew members', tester:'Peer', expected:'Crew can find the next session\u2019s date within a few seconds', actual:'All 3 scrolled straight past the schedule at the bottom of the page', result:'Fail', fix:'Moved the schedule to directly under the header in wireframe v2'},
+      {test:'Live site trial at an actual skate session', tester:'Real end user', expected:'New skaters can find the getting-started info from the home page', actual:'2 of 5 couldn\u2019t find it — it was only in the footer', result:'Partial', fix:'Added "Getting Started" to the main nav menu'},
+      {test:'Contact form — minimal required fields', tester:'Self', expected:'Form submits with just first name and email, rejects empty submissions', actual:'Worked correctly', result:'Pass', fix:'—'}
+    ]
+  },
+  3: {
+    student:'Priya Chand', project:'Wainuiomata Community Pantry — a website with a volunteer sign-up system and donation tracker', standard:'AS91907 + AS91901 (Level 3 combo)',
+    headings:{
+      h_purpose:'The Community Pantry needed more than a brochure site: coordinators wanted an online way for volunteers to sign up for shifts and to see (roughly) how donations were tracking toward a weekly goal, without needing a paid booking platform. Users span two very different groups — time-poor volunteers signing up on their phones, and non-technical coordinators who need to check sign-ups without any training. This dual-audience, functional-not-just-informational brief is what pushes the build into genuinely complex processes rather than a static site.',
+      h_design:'I applied UX methodology properly rather than guessing: I interviewed two coordinators and three regular volunteers to build two personas (a first-time volunteer signing up on a bus, and a coordinator checking shifts between other jobs). Paper-prototype wireframes were tested with both personas in mind — the first version had the donation tracker as its own separate page, but testing showed volunteers wanted to see "why this matters" (the tracker) right next to "what I can do" (the sign-up form), so I merged them onto one page. That\'s a design decision justified directly by user research, not personal preference — the core of an informed, and then refined, UX design.',
+      h_dev:'The build uses complex processes appropriate to Level 3: a JS-driven shift sign-up system with client-side form validation (won\'t submit without a valid name and at least one shift selected), and a donation tracker rendered from a small local JSON-style dataset that updates a progress bar without reloading the page. I structured the project into clear folders (/assets, /scripts, /data) and used Git branching (a "feature/tracker" branch merged back into main once tested) rather than committing straight to one branch, which let me build and test the tracker without risking the working sign-up form.',
+      h_impl:'I went deeper than a Level 2 response here: for accessibility, every interactive element is keyboard-operable (not just mouse/touch), which matters because some older volunteers use the site on a library computer without a trackpad — I tested this directly by completing a full sign-up using only Tab and Enter. For privacy, I considered storing sign-ups directly in a database, but rejected that alternative: a Level 3 build shouldn\'t collect and hold personal data it doesn\'t need to, so sign-ups instead generate a pre-filled email to the coordinator, meaning no volunteer data is stored on the site at all. That\'s a justified choice between two real alternatives, not just a feature I happened to add.',
+      h_test:'Testing was systematic: validated HTML/CSS, checked in Chrome/Safari/Firefox/Edge, and specifically tested edge cases — an empty submission, a very long name, and rapid double-clicking the submit button (which could otherwise trigger two emails; I disabled the button on first click to prevent this). I then trialled the full site with two real coordinators and three volunteers in a real setting (the pantry\'s Tuesday session), which surfaced a genuine usability problem neither testing round alone would have: the shift times were in 24-hour format and two older volunteers misread "14:00" as 4pm. I changed the display format to 12-hour time with am/pm, which is a robustness fix that came directly from trialling with real end users, not from technical testing.',
+      h_reflect:'I chose plain HTML/CSS/JS over a framework (e.g. React) after weighing the alternative: a framework would have added build tooling the coordinators (who\'ll eventually maintain basic content themselves) wouldn\'t be able to touch, whereas plain JS keeps the whole thing editable by anyone with basic HTML knowledge — a justified trade-off between technical sophistication and real-world maintainability for this specific client. Combined with the keyboard-accessibility testing, the privacy-by-design decision on data storage, and the 12-hour time fix from live trialling, the outcome isn\'t just complex for its own sake — every complex decision is tied back to a specific user need or a specific alternative I considered and rejected, which is what separates a refined, justified Excellence outcome from a merely working one.'
+    },
+    margins:{
+      h_purpose:{a:'brief.docx agreed with 2 coordinators, requirements list', m:'—', e:'—'},
+      h_design:{a:'personas.pdf (2 personas) + paper-wireframes.pdf', m:'user-research-notes.docx linking design choices to specific interview comments', e:'wireframe-v1-vs-v2.pdf showing the tracker/sign-up merge, justified against persona needs'},
+      h_dev:{a:'/assets /scripts /data folder structure screenshot + working sign-up form', m:'Git log showing feature/tracker branch merged to main, with commit messages', e:'—'},
+      h_impl:{a:'—', m:'implications-table.docx: accessibility (keyboard nav) + privacy (no stored data)', e:'privacy-alternatives.docx — comparing "store in DB" vs "email coordinator", with reasoning for the choice made'},
+      h_test:{a:'validation + cross-browser testing log', m:'edge-case-testing.docx: empty/long input, double-submit fix', e:'trial-log.docx: real Tuesday-session trial with 5 people, 12-hour time fix traced to 2 named comments'},
+      h_reflect:{a:'—', m:'—', e:'justification paragraph above, comparing the framework-vs-plain-JS alternative and why plain JS was chosen for this specific client'}
+    },
+    testRows:[
+      {test:'Validated HTML/CSS through the W3C validator', tester:'Self', expected:'No errors', actual:'2 minor CSS vendor-prefix warnings', result:'Partial', fix:'Fixed the flagged vendor-prefix warnings'},
+      {test:'Sign-up form — empty submission', tester:'Self', expected:'Form blocks submission and shows an error', actual:'Blocked correctly with a clear inline message', result:'Pass', fix:'—'},
+      {test:'Sign-up form — rapid double-click on submit', tester:'Self', expected:'Only one confirmation email is triggered', actual:'First attempt sent two emails from one click', result:'Fail', fix:'Disabled the submit button immediately on first click'},
+      {test:'Full sign-up flow using only keyboard (Tab/Enter, no mouse)', tester:'Self', expected:'Every field and the submit button reachable and usable by keyboard alone', actual:'Worked correctly on first attempt', result:'Pass', fix:'—'},
+      {test:'Live trial at a Tuesday pantry session', tester:'Real end user', expected:'Volunteers and coordinators read shift times correctly at a glance', actual:'2 older volunteers misread "14:00" as 4pm', result:'Fail', fix:'Changed shift-time display to 12-hour format with am/pm'},
+      {test:'Donation tracker updates without a page reload', tester:'Peer', expected:'Progress bar updates instantly when test data changes', actual:'Updated correctly, no reload needed', result:'Pass', fix:'—'}
+    ]
+  }
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init(){
+  buildLevelBar();
+  buildLevelPanels();
+  buildRubricPanel();
+  buildHeadingBlocks();
+  wireTabs();
+  wireLevelBar();
+  wireSaveFields();
+  wireButtons();
+  wireArchive();
+  initArchive();
+  load();
+  syncAllRowsDone();
+  selectLevel(APP.level);
+  showTab('checklist');
+}
+
+/* ---------- Level bar ---------- */
+function buildLevelBar(){
+  var btns = document.querySelectorAll('#levelBar .levelbtn');
+  for(var i=0;i<btns.length;i++){
+    (function(btn){
+      btn.addEventListener('click', function(){ selectLevel(parseInt(btn.getAttribute('data-level'),10)); });
+    })(btns[i]);
+  }
+}
+function wireLevelBar(){}
+
+function selectLevel(lvl){
+  APP.level = lvl;
+  var btns = document.querySelectorAll('#levelBar .levelbtn');
+  for(var i=0;i<btns.length;i++){
+    var b = btns[i];
+    b.className = 'levelbtn' + (parseInt(b.getAttribute('data-level'),10)===lvl ? ' active':'');
+  }
+  var panels = document.querySelectorAll('.levelpanel');
+  for(var j=0;j<panels.length;j++){
+    panels[j].className = 'levelpanel' + (panels[j].getAttribute('data-level')===String(lvl) ? ' active':'');
+  }
+  saveField('APP_level', String(lvl));
+  updateProgress();
+  var exBtn = document.getElementById('btnViewExample');
+  if(exBtn) exBtn.textContent = '📘 View Worked Example (Excellence) — Level '+lvl;
+}
+
+/* ---------- Build checklist panels ---------- */
+function buildLevelPanels(){
+  var host = document.getElementById('levelPanels');
+  var html = '';
+  for(var lvl=1; lvl<=3; lvl++){
+    var std = STANDARDS[lvl];
+    var total = std.credits + (std.second ? std.second.credits : 0);
+    html += '<div class="levelpanel" data-level="'+lvl+'">';
+    html += '<div class="stdbox"><b>Standard 1 — '+std.code+'</b> — '+std.title+' &middot; '+std.credits+' credits &middot; '+std.assess;
+    if(std.second){
+      html += '<br><b>Standard 2 — '+std.second.code+'</b> — '+std.second.title+' &middot; '+std.second.credits+' credits &middot; Internal';
+      html += '<br><b style="color:var(--accent)">Combined portfolio total: '+total+' credits</b>';
+    }
+    html += '<br><span style="color:#64748b">'+std.note+'</span></div>';
+    html += '<div class="sectionhead" style="color:var(--accent)">Standard 1 — '+std.code+'</div>';
+    LEVEL_KEYS.forEach(function(key){
+      html += reqSectionHtml(lvl, '1', key, std.req[key]);
+    });
+    if(std.second){
+      html += '<div class="sectionhead" style="color:var(--accent2);margin-top:22px">Standard 2 — '+std.second.code+' ('+std.second.tag+')</div>';
+      html += '<p style="font-size:.82rem;color:#64748b;margin:0 0 8px">'+std.second.note+'</p>';
+      LEVEL_KEYS.forEach(function(key){
+        html += reqSectionHtml(lvl, '2', key, std.second.req[key]);
+      });
+    }
+    html += '</div>';
+  }
+  host.innerHTML = html;
+}
+
+function reqSectionHtml(lvl, stdNum, key, items){
+  var html = '<div class="sectionhead"><span class="pill '+key+'">'+LEVEL_LABELS[key]+'</span></div>';
+  for(var i=0;i<items.length;i++){
+    var it = items[i];
+    var base = 'l'+lvl+'_s'+stdNum+'_'+key+'_'+i;
+    html += '<div class="reqrow '+key+'" data-rowfor="'+base+'_chk">';
+    html += '  <div class="reqtop">';
+    html += '    <input type="checkbox" id="'+base+'_chk" data-save="1" data-progress="'+lvl+'" data-std="'+stdNum+'" data-tier="'+key+'">';
+    html += '    <div class="reqtext">'+it.t+'</div>';
+    html += '  </div>';
+    html += '  <div class="reqways"><div><b>Ways to show this in your code</b>'+it.code+'</div><div><b>Ways to show this in your paperwork</b>'+it.paper+'</div></div>';
+    html += '  <div class="evidencerow"><label>Where is your evidence for this? (link, filename, or short note)</label><input type="text" id="'+base+'_evi" data-save="1" placeholder="e.g. index.html lines 1-20, or Feedback-log.docx"></div>';
+    html += '</div>';
+  }
+  return html;
+}
+
+/* ---------- Marking rubric (read-only reference) ---------- */
+function buildRubricPanel(){
+  var host = document.getElementById('rubricHost');
+  var html = '';
+  for(var lvl=1; lvl<=3; lvl++){
+    var std = STANDARDS[lvl];
+    html += '<div class="levelpanel" data-level="'+lvl+'">';
+    html += rubricStdHtml(lvl, '1', std.code, std.title, std.credits, std.req);
+    if(std.second){
+      html += rubricStdHtml(lvl, '2', std.second.code, std.second.title, std.second.credits, std.second.req);
+    }
+    html += '</div>';
+  }
+  host.innerHTML = html;
+}
+
+function rubricStdHtml(lvl, stdNum, code, title, credits, req){
+  var html = '<div class="rubrichead">'+code+' — '+title+' &middot; '+credits+' credits</div>';
+  html += '<div class="rubrictable">';
+  html += '  <div class="rhead a">Achievement</div><div class="rhead m">Merit</div><div class="rhead e">Excellence</div>';
+  ['a','m','e'].forEach(function(key){
+    html += '  <div class="rcell"><ul>';
+    req[key].forEach(function(it){ html += '<li>'+it.t+'</li>'; });
+    html += '  </ul></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+/* ---------- Progress bars ---------- */
+function updateProgress(){
+  var host = document.getElementById('progressWrap');
+  var lvl = APP.level;
+  var std = STANDARDS[lvl];
+  var stdNums = std.second ? ['1','2'] : ['1'];
+  var html = '';
+  stdNums.forEach(function(stdNum){
+    var counts = {a:{done:0,total:0}, m:{done:0,total:0}, e:{done:0,total:0}};
+    var boxes = document.querySelectorAll('input[data-progress="'+lvl+'"][data-std="'+stdNum+'"]');
+    for(var i=0;i<boxes.length;i++){
+      var tier = boxes[i].getAttribute('data-tier');
+      counts[tier].total++;
+      if(boxes[i].checked) counts[tier].done++;
+    }
+    var aFull = !counts.a.total || counts.a.done===counts.a.total;
+    var mFull = !counts.m.total || counts.m.done===counts.m.total;
+    var eFull = !counts.e.total || counts.e.done===counts.e.total;
+    /* NCEA grades are cumulative: Merit requires Achievement criteria to also
+       be met, and Excellence requires both Achievement and Merit. A tier's
+       own checklist being ticked off isn't enough on its own. */
+    var cumulative = {a: aFull, m: aFull && mFull, e: aFull && mFull && eFull};
+    var grade = 'Not yet at Achieved';
+    if(cumulative.e) grade = 'Excellence';
+    else if(cumulative.m) grade = 'Merit';
+    else if(cumulative.a) grade = 'Achieved';
+    var label = stdNum==='1' ? std.code : (std.second ? std.second.code : '');
+    html += '<div class="pbargroup" style="flex:1;min-width:280px">';
+    html += '<div style="font-size:.72rem;font-weight:800;color:#64748b;margin-bottom:4px;text-transform:uppercase">'+(std.second?('Standard '+stdNum+' — '+label+' &middot; '):'')+'Grade on track: <span style="color:var(--accent)">'+grade+'</span></div>';
+    html += '<div style="display:flex;gap:10px;flex-wrap:wrap">';
+    LEVEL_KEYS.forEach(function(k){
+      var c = counts[k];
+      var pct = c.total ? Math.round(c.done/c.total*100) : 0;
+      var badge = (pct===100 && c.total && cumulative[k]) ? ' <span class="pill '+k+'" style="margin-left:4px">✓ Complete</span>' : '';
+      html += '<div class="pbar '+k+'"><div class="lbl"><span>'+LEVEL_LABELS[k]+badge+'</span><span>'+c.done+'/'+c.total+'</span></div><div class="track"><div class="fill" style="width:'+pct+'%"></div></div></div>';
+    });
+    html += '</div></div>';
+  });
+  host.innerHTML = html;
+}
+
+/* ---------- Final submission form headings ---------- */
+function buildHeadingBlocks(){
+  var host = document.getElementById('headingBlocks');
+  var html = '';
+  for(var i=0;i<HEADINGS.length;i++){
+    var h = HEADINGS[i];
+    html += '<div class="headingblock">';
+    html += '  <div>';
+    html += '    <h3>'+h.title+'</h3>';
+    html += '    <p style="font-size:.78rem;color:#64748b;margin:0 0 6px">'+h.hint+'</p>';
+    html += '    <textarea id="'+h.id+'_body" data-save="1" style="min-height:110px" placeholder="Write your content for this section here..."></textarea>';
+    html += '  </div>';
+    html += '  <div class="margincol">';
+    html += '    <div class="marginfield a"><label>Achievement evidence</label><textarea id="'+h.id+'_a" data-save="1" placeholder="What here shows Achieved?"></textarea></div>';
+    html += '    <div class="marginfield m"><label>Merit evidence</label><textarea id="'+h.id+'_m" data-save="1" placeholder="What here shows Merit?"></textarea></div>';
+    html += '    <div class="marginfield e"><label>Excellence evidence</label><textarea id="'+h.id+'_e" data-save="1" placeholder="What here shows Excellence?"></textarea></div>';
+    html += '  </div>';
+    html += '</div>';
+    if(h.id==='h_test'){
+      html += '<div class="testtablewrap">';
+      html += '  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">';
+      html += '    <b style="font-size:.88rem">Testing &amp; Trialling Table</b>';
+      html += '    <button class="btn secondary" id="btnAddTestRow" type="button">+ Add Test Row</button>';
+      html += '  </div>';
+      html += '  <p style="font-size:.78rem;color:#64748b;margin:4px 0 8px">Log each test as its own row. Include at least one row where a real person (peer, teacher, or end user) trialled the site — that\'s what Merit/Excellence trialling evidence needs, not just your own testing.</p>';
+      html += '  <div style="overflow-x:auto"><table class="testtable" id="testTable"><thead><tr>';
+      html += '    <th style="width:26px">#</th><th>What did you test?</th><th>Tested by</th><th>Expected result</th><th>Actual result</th><th>Result</th><th>Fix / change made</th><th></th>';
+      html += '  </tr></thead><tbody id="testTableBody"></tbody></table></div>';
+      html += '  <textarea id="h_test_rows_data" data-save="1" style="display:none"></textarea>';
+      html += '</div>';
+    }
+  }
+  host.innerHTML = html;
+  renderTestTable();
+}
+
+/* ---------- Testing table generator ---------- */
+var TEST_ROWS = [];
+var TEST_TESTERS = ['Self','Peer','Teacher','Real end user','Other'];
+var TEST_RESULTS = ['Pass','Partial','Fail'];
+function blankTestRow(){ return {test:'', tester:'Self', expected:'', actual:'', result:'Pass', fix:''}; }
+function renderTestTable(){
+  var body = document.getElementById('testTableBody');
+  if(!body) return;
+  if(TEST_ROWS.length===0){
+    body.innerHTML = '<tr><td colspan="8" class="emptytest">No test rows yet — click "+ Add Test Row" to start logging your testing and trialling.</td></tr>';
+    return;
+  }
+  var html = '';
+  TEST_ROWS.forEach(function(row, i){
+    html += '<tr>';
+    html += '  <td class="rownum">'+(i+1)+'</td>';
+    html += '  <td><input type="text" data-idx="'+i+'" data-field="test" value="'+attrEsc(row.test)+'" placeholder="e.g. Nav menu on iPhone SE width"></td>';
+    html += '  <td><select data-idx="'+i+'" data-field="tester">'+TEST_TESTERS.map(function(t){ return '<option'+(row.tester===t?' selected':'')+'>'+t+'</option>'; }).join('')+'</select></td>';
+    html += '  <td><input type="text" data-idx="'+i+'" data-field="expected" value="'+attrEsc(row.expected)+'" placeholder="What should happen"></td>';
+    html += '  <td><input type="text" data-idx="'+i+'" data-field="actual" value="'+attrEsc(row.actual)+'" placeholder="What actually happened"></td>';
+    html += '  <td><select data-idx="'+i+'" data-field="result" class="res-'+row.result.toLowerCase()+'">'+TEST_RESULTS.map(function(r){ return '<option'+(row.result===r?' selected':'')+'>'+r+'</option>'; }).join('')+'</select></td>';
+    html += '  <td><input type="text" data-idx="'+i+'" data-field="fix" value="'+attrEsc(row.fix)+'" placeholder="What you changed, if anything"></td>';
+    html += '  <td><button type="button" class="rowdel" data-idx="'+i+'" title="Delete row">✕</button></td>';
+    html += '</tr>';
+  });
+  body.innerHTML = html;
+  var inputs = body.querySelectorAll('input[data-field],select[data-field]');
+  for(var j=0;j<inputs.length;j++){
+    inputs[j].addEventListener('input', onTestCellChange);
+    inputs[j].addEventListener('change', onTestCellChange);
+  }
+  var dels = body.querySelectorAll('.rowdel');
+  for(var k=0;k<dels.length;k++){
+    dels[k].addEventListener('click', function(e){
+      var idx = parseInt(e.target.getAttribute('data-idx'),10);
+      TEST_ROWS.splice(idx,1);
+      renderTestTable();
+      syncTestTableData();
+      debounceSave();
+    });
+  }
+}
+function attrEsc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function buildTestTableDocHtml(rows){
+  rows = rows || TEST_ROWS;
+  if(!rows || rows.length===0) return '<p style="font-size:.85rem;color:#999">(no test rows logged yet)</p>';
+  var html = '<div style="overflow-x:auto"><table class="doc-testtable"><thead><tr>';
+  html += '<th>#</th><th>What was tested</th><th>Tested by</th><th>Expected result</th><th>Actual result</th><th>Result</th><th>Fix / change made</th>';
+  html += '</tr></thead><tbody>';
+  rows.forEach(function(row, i){
+    var cls = 'dt-'+(row.result||'').toLowerCase();
+    html += '<tr>';
+    html += '<td>'+(i+1)+'</td>';
+    html += '<td>'+esc(row.test)+'</td>';
+    html += '<td>'+esc(row.tester)+'</td>';
+    html += '<td>'+esc(row.expected)+'</td>';
+    html += '<td>'+esc(row.actual)+'</td>';
+    html += '<td class="'+cls+'"><b>'+esc(row.result)+'</b></td>';
+    html += '<td>'+esc(row.fix)+'</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+function onTestCellChange(e){
+  var idx = parseInt(e.target.getAttribute('data-idx'),10);
+  var field = e.target.getAttribute('data-field');
+  if(!TEST_ROWS[idx]) return;
+  TEST_ROWS[idx][field] = e.target.value;
+  if(field==='result'){ e.target.className = 'res-'+e.target.value.toLowerCase(); }
+  syncTestTableData();
+  debounceSave();
+}
+function syncTestTableData(){
+  var field = document.getElementById('h_test_rows_data');
+  if(field) field.value = JSON.stringify(TEST_ROWS);
+}
+function loadTestTableFromField(){
+  var field = document.getElementById('h_test_rows_data');
+  if(!field || !field.value){ TEST_ROWS = []; renderTestTable(); return; }
+  try{ TEST_ROWS = JSON.parse(field.value) || []; }catch(e){ TEST_ROWS = []; }
+  renderTestTable();
+}
+
+/* ---------- Tabs ---------- */
+function wireTabs(){
+  var btns = document.querySelectorAll('#tabBar .tabbtn');
+  for(var i=0;i<btns.length;i++){
+    (function(btn){
+      btn.addEventListener('click', function(){ showTab(btn.getAttribute('data-tab')); });
+    })(btns[i]);
+  }
+}
+function showTab(name){
+  var btns = document.querySelectorAll('#tabBar .tabbtn');
+  for(var i=0;i<btns.length;i++){
+    btns[i].className = 'tabbtn' + (btns[i].getAttribute('data-tab')===name ? ' active':'');
+  }
+  var panels = document.querySelectorAll('.tabpanel');
+  for(var j=0;j<panels.length;j++){
+    panels[j].className = 'tabpanel' + (panels[j].id==='tab-'+name ? ' active':'');
+  }
+  if(name==='checklist') updateProgress();
+  if(name==='archive' && ARC.ready) renderArchive();
+}
+
+/* ============================================================
+   SAVE / LOAD (localStorage)
+   ============================================================ */
+function getAllData(){
+  var data = {};
+  var els = document.querySelectorAll('[data-save="1"]');
+  for(var i=0;i<els.length;i++){
+    var el = els[i];
+    if(el.type==='checkbox' || el.type==='radio'){ data[el.id] = el.checked; }
+    else { data[el.id] = el.value; }
+  }
+  data.APP_level = String(APP.level);
+  return data;
+}
+function saveAll(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(getAllData()));
+    toast('Saved');
+  }catch(e){ toast('Could not save (storage unavailable)'); }
+}
+function saveField(id, val){
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    var data = raw ? JSON.parse(raw) : {};
+    data[id] = val;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }catch(e){}
+}
+function load(){
+  var raw = null;
+  try{ raw = localStorage.getItem(STORAGE_KEY); }catch(e){}
+  if(!raw) return;
+  var data;
+  try{ data = JSON.parse(raw); }catch(e){ return; }
+  applyData(data);
+  loadTestTableFromField();
+}
+function applyData(data){
+  for(var id in data){
+    if(id==='APP_level') continue;
+    var el = document.getElementById(id);
+    if(!el) continue;
+    if(el.type==='checkbox' || el.type==='radio'){ el.checked = !!data[id]; }
+    else { el.value = data[id]; }
+  }
+  if(data.APP_level){ APP.level = parseInt(data.APP_level,10) || 1; }
+}
+function wireSaveFields(){
+  document.addEventListener('input', function(e){
+    if(e.target && e.target.getAttribute && e.target.getAttribute('data-save')==='1'){
+      debounceSave();
+      if(e.target.hasAttribute('data-progress')) updateProgress();
+    }
+  });
+  document.addEventListener('change', function(e){
+    if(e.target && e.target.getAttribute && e.target.getAttribute('data-save')==='1'){
+      debounceSave();
+      if(e.target.hasAttribute('data-progress')){
+        syncRowDone(e.target);
+        updateProgress();
+      }
+    }
+  });
+  /* Click anywhere on a requirement row (except the evidence input) toggles its checkbox */
+  document.addEventListener('click', function(e){
+    var row = e.target.closest ? e.target.closest('.reqrow') : null;
+    if(!row) return;
+    if(e.target.tagName==='INPUT' && e.target.type==='text') return; /* let typing in evidence field work normally */
+    if(e.target.tagName==='INPUT' && e.target.type==='checkbox') return; /* checkbox handles its own click */
+    var chkId = row.getAttribute('data-rowfor');
+    var chk = chkId ? document.getElementById(chkId) : null;
+    if(chk){
+      chk.checked = !chk.checked;
+      syncRowDone(chk);
+      debounceSave();
+      updateProgress();
+      toast(chk.checked ? 'Marked ready ✓' : 'Marked not ready');
+    }
+  });
+}
+function syncRowDone(chk){
+  var row = chk.closest ? chk.closest('.reqrow') : chk.parentNode.parentNode;
+  if(!row) return;
+  var textEl = row.querySelector('.reqtext');
+  if(chk.checked){
+    row.className = row.className.indexOf('done')===-1 ? row.className+' done' : row.className;
+    if(textEl && textEl.innerHTML.indexOf('donetick')===-1){ textEl.innerHTML = '<span class="donetick">✓</span>'+textEl.innerHTML; }
+  } else {
+    row.className = row.className.replace(' done','').replace('done','').trim();
+    if(textEl){ textEl.innerHTML = textEl.innerHTML.replace(/<span class="donetick">✓<\/span>/,''); }
+  }
+}
+function syncAllRowsDone(){
+  var boxes = document.querySelectorAll('.reqrow input[type=checkbox]');
+  for(var i=0;i<boxes.length;i++){ syncRowDone(boxes[i]); }
+}
+var saveTimer = null;
+function debounceSave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAll, 500);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show';
+  clearTimeout(t._hideTimer);
+  t._hideTimer = setTimeout(function(){ t.className='toast'; }, 1800);
+}
+
+function buildRubricExportRows(){
+  var rows = [];
+  for(var lvl=1; lvl<=3; lvl++){
+    var std = STANDARDS[lvl];
+    var stds = [{num:1, code:std.code, title:std.title, credits:std.credits, req:std.req}];
+    if(std.second){ stds.push({num:2, code:std.second.code, title:std.second.title, credits:std.second.credits, req:std.second.req}); }
+    stds.forEach(function(s){
+      ['a','m','e'].forEach(function(tier){
+        s.req[tier].forEach(function(it, idx){
+          rows.push({
+            level: lvl,
+            standardNumber: s.num,
+            standardCode: s.code,
+            standardTitle: s.title,
+            credits: s.credits,
+            tier: LEVEL_LABELS[tier],
+            criterionIndex: idx+1,
+            criterion: it.t,
+            waysInCode: it.code,
+            waysInPaperwork: it.paper
+          });
+        });
+      });
+    });
+  }
+  return rows;
+}
+function downloadBlob(content, type, filename){
+  var blob = new Blob([content], {type:type});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+function exportRubricJson(){
+  var rows = buildRubricExportRows();
+  downloadBlob(JSON.stringify(rows, null, 2), 'application/json', 'NCEA-WebPortfolio-Rubrics.json');
+  toast('Rubric JSON exported');
+}
+function csvEscape(v){
+  v = (v===undefined || v===null) ? '' : String(v);
+  v = v.replace(/<[^>]+>/g,'');
+  if(/[",\n]/.test(v)){ v = '"'+v.replace(/"/g,'""')+'"'; }
+  return v;
+}
+function exportRubricCsv(){
+  var rows = buildRubricExportRows();
+  var cols = ['level','standardNumber','standardCode','standardTitle','credits','tier','criterionIndex','criterion','waysInCode','waysInPaperwork'];
+  var lines = [cols.join(',')];
+  rows.forEach(function(r){
+    lines.push(cols.map(function(c){ return csvEscape(r[c]); }).join(','));
+  });
+  downloadBlob(lines.join('\r\n'), 'text/csv', 'NCEA-WebPortfolio-Rubrics.csv');
+  toast('Rubric CSV exported');
+}
+
+/* ============================================================
+   BUTTONS: export/import/reset/print
+   ============================================================ */
+function wireButtons(){
+  document.getElementById('btnExportJson').addEventListener('click', exportJson);
+  document.getElementById('btnImportJson').addEventListener('click', function(){ document.getElementById('fileImport').click(); });
+  document.getElementById('fileImport').addEventListener('change', importJson);
+  document.getElementById('btnReset').addEventListener('click', function(){ document.getElementById('resetModal').className='modalbg show'; });
+  document.getElementById('resetCancel').addEventListener('click', function(){ document.getElementById('resetModal').className='modalbg'; });
+  document.getElementById('resetConfirm').addEventListener('click', doReset);
+  document.getElementById('btnBuildCompiled').addEventListener('click', buildCompiled);
+  document.getElementById('btnPrint').addEventListener('click', function(){ buildCompiled(); window.print(); });
+  document.getElementById('btnExportHtml').addEventListener('click', exportSubmissionHtml);
+  document.getElementById('btnRubricJson').addEventListener('click', exportRubricJson);
+  document.getElementById('btnRubricCsv').addEventListener('click', exportRubricCsv);
+  document.getElementById('btnViewExample').addEventListener('click', openExampleModal);
+  document.getElementById('exampleClose').addEventListener('click', function(){ document.getElementById('exampleModal').className='modalbg'; });
+  document.getElementById('btnAddTestRow').addEventListener('click', function(){
+    TEST_ROWS.push(blankTestRow());
+    renderTestTable();
+    syncTestTableData();
+    debounceSave();
+  });
+}
+
+function exportJson(){
+  var data = getAllData();
+  var name = (document.getElementById('s_name').value || 'student').replace(/[^a-z0-9]+/gi,'-');
+  var blob = new Blob([JSON.stringify(data,null,2)], {type:'application/octet-stream'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'NCEA-WebPortfolio-Submission-' + name + '.standardsubmit';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  toast('Backup exported');
+}
+function importJson(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    try{
+      var data = JSON.parse(ev.target.result);
+      applyData(data);
+      saveAll();
+      syncAllRowsDone();
+      loadTestTableFromField();
+      selectLevel(APP.level);
+      toast('Backup loaded');
+    }catch(err){ toast('Could not read that file'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+function doReset(){
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  document.getElementById('resetModal').className='modalbg';
+  location.reload();
+}
+
+/* ============================================================
+   COMPILE PRINTABLE DOCUMENT
+   ============================================================ */
+function esc(s){
+  s = s || '';
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML.replace(/\n/g,'<br>');
+}
+
+/* ---------- Worked example viewer ---------- */
+function buildExampleHtml(lvl){
+  var ex = EXAMPLES[lvl];
+  var std = STANDARDS[lvl];
+  var html = '<p style="font-size:.85rem;color:#4a5568"><b>Fictional example</b> — written to show what an Excellence-standard submission looks like for <b>'+ex.standard+'</b>. Student: <i>'+ex.student+'</i> &middot; Project: <i>'+ex.project+'</i>.</p>';
+  for(var i=0;i<HEADINGS.length;i++){
+    var h = HEADINGS[i];
+    var body = ex.headings[h.id];
+    var m = ex.margins[h.id];
+    if(!body) continue;
+    html += '<div class="doc-heading">'+h.title+'</div>';
+    html += '<div class="doc-block">';
+    html += '  <div class="doc-body">'+body+'</div>';
+    if(m){
+      html += '  <div class="doc-margin">';
+      html += '    <div class="a"><b>Achievement</b>'+(m.a||'—')+'</div>';
+      html += '    <div class="m"><b>Merit</b>'+(m.m||'—')+'</div>';
+      html += '    <div class="e"><b>Excellence</b>'+(m.e||'—')+'</div>';
+      html += '  </div>';
+    }
+    html += '</div>';
+    if(h.id==='h_test' && ex.testRows){
+      html += '<p style="font-size:.8rem;color:#4a5568;margin:2px 0 4px"><b>Testing &amp; Trialling Table</b> — this is what the testing table generator looks like filled in:</p>';
+      html += buildTestTableDocHtml(ex.testRows);
+    }
+  }
+  return html;
+}
+function openExampleModal(){
+  var ex = EXAMPLES[APP.level];
+  document.getElementById('exampleTitle').textContent = 'Worked Example — Level '+APP.level+' ('+ex.standard+')';
+  document.getElementById('exampleBody').innerHTML = buildExampleHtml(APP.level);
+  document.getElementById('exampleModal').className = 'modalbg show';
+}
+function buildCompiled(){
+  var std = STANDARDS[APP.level];
+  var name = document.getElementById('s_name').value || '';
+  var cls = document.getElementById('s_class').value || '';
+  var teacher = document.getElementById('s_teacher').value || '';
+  var date = document.getElementById('s_date').value || '';
+
+  var html = '';
+  html += '<div class="covertitle"><h1>Website Development Portfolio — Final Submission</h1><p>'+std.code+' &middot; '+std.title+' &middot; Level '+APP.level+' &middot; '+std.credits+' credits</p></div>';
+  html += '<div class="coverdetails">';
+  html += '<div><b>Student:</b> '+esc(name)+'</div><div><b>Class:</b> '+esc(cls)+'</div>';
+  html += '<div><b>Teacher:</b> '+esc(teacher)+'</div><div><b>Date submitted:</b> '+esc(date)+'</div>';
+  html += '</div>';
+
+  html += '<div class="doc-heading">Links</div>';
+  html += '<div class="doc-body">';
+  html += 'Hosted site: '+esc(document.getElementById('lnk_site').value)+'<br>';
+  html += 'Repository: '+esc(document.getElementById('lnk_repo').value)+'<br>';
+  html += 'Design files: '+esc(document.getElementById('lnk_design').value)+'<br>';
+  html += 'Video/audio: '+esc(document.getElementById('lnk_video').value)+'<br>';
+  html += 'Other: '+esc(document.getElementById('lnk_other').value);
+  html += '</div>';
+
+  for(var i=0;i<HEADINGS.length;i++){
+    var h = HEADINGS[i];
+    var body = document.getElementById(h.id+'_body').value;
+    var a = document.getElementById(h.id+'_a').value;
+    var m = document.getElementById(h.id+'_m').value;
+    var e = document.getElementById(h.id+'_e').value;
+    html += '<div class="doc-heading">'+h.title+'</div>';
+    html += '<div class="doc-block">';
+    html += '  <div class="doc-body">'+(esc(body) || '<span style="color:#999">(not yet written)</span>')+'</div>';
+    html += '  <div class="doc-margin">';
+    html += '    <div class="a"><b>Achievement</b>'+(esc(a)||'—')+'</div>';
+    html += '    <div class="m"><b>Merit</b>'+(esc(m)||'—')+'</div>';
+    html += '    <div class="e"><b>Excellence</b>'+(esc(e)||'—')+'</div>';
+    html += '  </div>';
+    html += '</div>';
+    if(h.id==='h_test'){ html += buildTestTableDocHtml(); }
+  }
+  var stdNums = std.second ? ['1','2'] : ['1'];
+  html += '<div class="doc-heading">Evidence Checklist Summary — Level '+APP.level+(std.second?' (combined '+(std.credits+std.second.credits)+'-credit portfolio)':'')+'</div>';
+  html += '<p style="font-size:.8rem;color:#666">NCEA grades are cumulative — Merit requires Achievement criteria to also be met, and Excellence requires both Achievement and Merit.</p>';
+  html += '<div class="doc-checklist">';
+  stdNums.forEach(function(stdNum){
+    var reqSet = stdNum==='1' ? std.req : std.second.req;
+    var stdCode = stdNum==='1' ? std.code : std.second.code;
+    var tierFull = {};
+    LEVEL_KEYS.forEach(function(key){
+      var items = reqSet[key];
+      var allDone = items.length===0;
+      if(items.length){
+        allDone = true;
+        for(var ci=0; ci<items.length; ci++){
+          var cchk = document.getElementById('l'+APP.level+'_s'+stdNum+'_'+key+'_'+ci+'_chk');
+          if(!cchk || !cchk.checked){ allDone = false; break; }
+        }
+      }
+      tierFull[key] = allDone;
+    });
+    var cum = {a:tierFull.a, m:tierFull.a && tierFull.m, e:tierFull.a && tierFull.m && tierFull.e};
+    var gradeOnTrack = cum.e ? 'Excellence' : (cum.m ? 'Merit' : (cum.a ? 'Achieved' : 'Not yet at Achieved'));
+    if(std.second){ html += '<p style="margin-top:14px"><b>Standard '+stdNum+' — '+stdCode+'</b> &middot; Grade on track: <b>'+gradeOnTrack+'</b></p>'; }
+    else { html += '<p><b>Grade on track: '+gradeOnTrack+'</b></p>'; }
+    LEVEL_KEYS.forEach(function(key){
+      html += '<p><b>'+LEVEL_LABELS[key]+'</b></p><ul>';
+      var items = reqSet[key];
+      for(var i2=0;i2<items.length;i2++){
+        var base = 'l'+APP.level+'_s'+stdNum+'_'+key+'_'+i2;
+        var chk = document.getElementById(base+'_chk');
+        var evi = document.getElementById(base+'_evi');
+        var done = chk && chk.checked;
+        html += '<li class="'+(done?'g':'r')+'">'+(done?'✓':'○')+' '+items[i2].t+(evi && evi.value ? ' — <i>'+esc(evi.value)+'</i>' : '')+'</li>';
+      }
+      html += '</ul>';
+    });
+  });
+  html += '</div>';
+
+  var declared = document.getElementById('declareCheck').checked;
+  var sig = document.getElementById('declareSig').value;
+  var ddate = document.getElementById('declareDate').value;
+  html += '<div class="doc-heading">Student Declaration</div>';
+  html += '<div class="doc-body">'+(declared?'☑':'☐')+' I confirm this is my own work, produced without unauthorised help or generative AI content generation, and that the evidence linked above is accurate and belongs to me.<br><br>Signed: '+esc(sig)+' &nbsp;&nbsp; Date: '+esc(ddate)+'</div>';
+
+  document.getElementById('compiledDoc').innerHTML = html;
+  document.getElementById('compiledPreview').innerHTML = html;
+  document.getElementById('compiledPreviewCard').style.display = 'block';
+  toast('Compiled document built');
+  return html;
+}
+
+/* ---------- Standalone Submission Report (.html) export ---------- */
+var STANDALONE_CSS = ''
+  + 'body{font-family:"Segoe UI",Verdana,Arial,sans-serif;color:#1c2430;max-width:900px;margin:0 auto;padding:24px 20px 60px;line-height:1.45}'
+  + '.covertitle{text-align:center;margin-bottom:20px}.covertitle h1{margin:0 0 4px;font-size:1.5rem}.covertitle p{margin:0;color:#555}'
+  + '.coverdetails{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;border:1px solid #ccc;border-radius:8px;padding:12px 16px;margin-bottom:18px;font-size:.92rem}'
+  + '.doc-heading{margin:22px 0 8px;font-size:1.1rem;border-bottom:2px solid #0f6f5c;padding-bottom:3px;color:#0f6f5c}'
+  + '.doc-block{display:block;margin-bottom:10px}'
+  + '.doc-body{font-size:.95rem;white-space:pre-wrap;overflow-wrap:break-word}'
+  + '.doc-margin{margin-top:8px}.doc-margin div{border-radius:6px;padding:6px 8px;font-size:.8rem;margin-bottom:6px;white-space:pre-wrap;overflow-wrap:break-word}'
+  + '.doc-margin .a{background:#e7f6ee;border:1px solid #bfe6cf}.doc-margin .m{background:#e9f1ff;border:1px solid #c2d8fb}.doc-margin .e{background:#f2eafd;border:1px solid #ddc8f7}'
+  + '.doc-margin b{display:block;font-size:.68rem;text-transform:uppercase}'
+  + '.doc-checklist{font-size:.9rem}.doc-checklist .g{color:#1e8e5a}.doc-checklist .r{color:#b33}'
+  + '.doc-testtable{border-collapse:collapse;width:100%;font-size:.85rem;margin:8px 0 4px}.doc-testtable th{background:#f1f4f8;text-align:left;padding:6px 7px;font-size:.72rem;text-transform:uppercase;color:#4a5568;border:1px solid #d4dae3}.doc-testtable td{border:1px solid #d4dae3;padding:6px 7px;vertical-align:top}.doc-testtable td.dt-pass{color:#1e8e5a}.doc-testtable td.dt-partial{color:#c96a1c}.doc-testtable td.dt-fail{color:#b33}'
+  + '@media print{body{max-width:100%}}';
+
+function exportSubmissionHtml(){
+  var html = buildCompiled();
+  var name = document.getElementById('s_name').value || 'student';
+  var page = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'
+    + '<title>Website Development Portfolio — Submission Report — '+name.replace(/</g,'&lt;')+'</title>'
+    + '<style>'+STANDALONE_CSS+'</style></head><body>'
+    + html
+    + '<p style="text-align:center;color:#8a94a6;font-size:.75rem;margin-top:40px">Developed by Sam McGuire 2026</p>'
+    + '</body></html>';
+  var safeName = name.replace(/[^a-z0-9]+/gi,'-') || 'student';
+  downloadBlob(page, 'text/html', 'Submission-Report-'+safeName+'.html');
+  toast('Submission report exported');
+}
+
+/* ============================================================
+   MINI ZIP WRITER — pure JS, no library, "store" method (no
+   compression). Produces a standard, valid .zip any archive
+   tool can open. Used by the Evidence Archive's zip export.
+   ============================================================ */
+var ZIP_CRC_TABLE = (function(){
+  var table = [];
+  for(var n=0;n<256;n++){
+    var c = n;
+    for(var k=0;k<8;k++){ c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); }
+    table[n] = c >>> 0;
+  }
+  return table;
+})();
+function zipCrc32(bytes){
+  var crc = 0xFFFFFFFF;
+  for(var i=0;i<bytes.length;i++){ crc = (crc >>> 8) ^ ZIP_CRC_TABLE[(crc ^ bytes[i]) & 0xFF]; }
+  return (crc ^ 0xFFFFFFFF) >>> 0;
+}
+function zipUtf8Bytes(str){
+  if(window.TextEncoder){ return new TextEncoder().encode(str); }
+  var utf8 = unescape(encodeURIComponent(str));
+  var bytes = new Uint8Array(utf8.length);
+  for(var i=0;i<utf8.length;i++){ bytes[i] = utf8.charCodeAt(i) & 0xFF; }
+  return bytes;
+}
+function zipDosTime(d){ return ((d.getHours() & 0x1F) << 11) | ((d.getMinutes() & 0x3F) << 5) | (Math.floor(d.getSeconds()/2) & 0x1F); }
+function zipDosDate(d){ return (((d.getFullYear()-1980) & 0x7F) << 9) | (((d.getMonth()+1) & 0xF) << 5) | (d.getDate() & 0x1F); }
+
+function ZipWriter(){ this.parts = []; this.central = []; this.offset = 0; }
+ZipWriter.prototype.addFile = function(name, bytes, date){
+  date = date || new Date();
+  var nameBytes = zipUtf8Bytes(name.replace(/\\/g,'/'));
+  var crc = zipCrc32(bytes);
+  var size = bytes.length;
+  var dt = zipDosTime(date), dd = zipDosDate(date);
+
+  var lh = new Uint8Array(30 + nameBytes.length);
+  var ldv = new DataView(lh.buffer);
+  ldv.setUint32(0, 0x04034b50, true);
+  ldv.setUint16(4, 20, true);
+  ldv.setUint16(6, 0, true);
+  ldv.setUint16(8, 0, true);
+  ldv.setUint16(10, dt, true);
+  ldv.setUint16(12, dd, true);
+  ldv.setUint32(14, crc, true);
+  ldv.setUint32(18, size, true);
+  ldv.setUint32(22, size, true);
+  ldv.setUint16(26, nameBytes.length, true);
+  ldv.setUint16(28, 0, true);
+  lh.set(nameBytes, 30);
+
+  var localOffset = this.offset;
+  this.parts.push(lh, bytes);
+  this.offset += lh.length + bytes.length;
+
+  var ch = new Uint8Array(46 + nameBytes.length);
+  var cdv = new DataView(ch.buffer);
+  cdv.setUint32(0, 0x02014b50, true);
+  cdv.setUint16(4, 20, true);
+  cdv.setUint16(6, 20, true);
+  cdv.setUint16(8, 0, true);
+  cdv.setUint16(10, 0, true);
+  cdv.setUint16(12, dt, true);
+  cdv.setUint16(14, dd, true);
+  cdv.setUint32(16, crc, true);
+  cdv.setUint32(20, size, true);
+  cdv.setUint32(24, size, true);
+  cdv.setUint16(28, nameBytes.length, true);
+  cdv.setUint16(30, 0, true);
+  cdv.setUint16(32, 0, true);
+  cdv.setUint16(34, 0, true);
+  cdv.setUint16(36, 0, true);
+  cdv.setUint32(38, 0, true);
+  cdv.setUint32(42, localOffset, true);
+  ch.set(nameBytes, 46);
+  this.central.push(ch);
+};
+ZipWriter.prototype.finalize = function(){
+  var centralStart = this.offset;
+  var centralSize = 0;
+  this.central.forEach(function(c){ centralSize += c.length; });
+  var eocd = new Uint8Array(22);
+  var edv = new DataView(eocd.buffer);
+  edv.setUint32(0, 0x06054b50, true);
+  edv.setUint16(4, 0, true);
+  edv.setUint16(6, 0, true);
+  edv.setUint16(8, this.central.length, true);
+  edv.setUint16(10, this.central.length, true);
+  edv.setUint32(12, centralSize, true);
+  edv.setUint32(16, centralStart, true);
+  edv.setUint16(20, 0, true);
+  var allParts = this.parts.concat(this.central).concat([eocd]);
+  return new Blob(allParts, {type:'application/zip'});
+};
+function zipDataUrlToBytes(dataUrl){
+  var base64 = (dataUrl.split(',')[1]) || '';
+  var binary = atob(base64);
+  var bytes = new Uint8Array(binary.length);
+  for(var i=0;i<binary.length;i++){ bytes[i] = binary.charCodeAt(i); }
+  return bytes;
+}
+
+/* ============================================================
+   EVIDENCE ARCHIVE — IndexedDB-backed virtual file manager
+   Files are stored as base64 data URLs. Structure:
+     /Submission Archive
+     /Submission Archive/submission.html
+     /Submission Archive/assets/...uploaded evidence...
+   ============================================================ */
+var ARC_DB_NAME = 'nceaEvidenceArchiveDB';
+var ARC_STORE = 'entries';
+var ARC_ROOT = '/Submission Archive';
+var ARC = { db:null, path:ARC_ROOT, selected:null, ready:false };
+
+function arcOpenDB(){
+  return new Promise(function(resolve, reject){
+    var req = indexedDB.open(ARC_DB_NAME, 1);
+    req.onupgradeneeded = function(e){
+      var db = e.target.result;
+      if(!db.objectStoreNames.contains(ARC_STORE)){
+        var store = db.createObjectStore(ARC_STORE, {keyPath:'path'});
+        store.createIndex('byParent', 'parentPath', {unique:false});
+      }
+    };
+    req.onsuccess = function(e){ resolve(e.target.result); };
+    req.onerror = function(e){ reject(e); };
+  });
+}
+function arcTx(mode){ return ARC.db.transaction(ARC_STORE, mode).objectStore(ARC_STORE); }
+function arcGet(path){
+  return new Promise(function(resolve){
+    var r = arcTx('readonly').get(path);
+    r.onsuccess = function(){ resolve(r.result || null); };
+    r.onerror = function(){ resolve(null); };
+  });
+}
+function arcPut(entry){
+  return new Promise(function(resolve, reject){
+    var r = arcTx('readwrite').put(entry);
+    r.onsuccess = function(){ resolve(entry); };
+    r.onerror = function(e){ reject(e); };
+  });
+}
+function arcDeleteOne(path){
+  return new Promise(function(resolve){
+    var r = arcTx('readwrite').delete(path);
+    r.onsuccess = function(){ resolve(); };
+    r.onerror = function(){ resolve(); };
+  });
+}
+function arcListChildren(parentPath){
+  return new Promise(function(resolve){
+    var idx = arcTx('readonly').index('byParent');
+    var r = idx.getAll(parentPath);
+    r.onsuccess = function(){ resolve(r.result || []); };
+    r.onerror = function(){ resolve([]); };
+  });
+}
+function arcGetAll(){
+  return new Promise(function(resolve){
+    var r = arcTx('readonly').getAll();
+    r.onsuccess = function(){ resolve(r.result || []); };
+    r.onerror = function(){ resolve([]); };
+  });
+}
+function arcEnsureRoot(){
+  return arcGet(ARC_ROOT).then(function(root){
+    if(root) return;
+    var now = new Date().toISOString();
+    return arcPut({path:ARC_ROOT, name:'Submission Archive', parentPath:null, type:'folder', modified:now})
+      .then(function(){ return arcPut({path:ARC_ROOT+'/assets', name:'assets', parentPath:ARC_ROOT, type:'folder', modified:now}); });
+  });
+}
+function arcUniquePath(parentPath, name){
+  return arcGet(parentPath+'/'+name).then(function(existing){
+    if(!existing) return parentPath+'/'+name;
+    var dot = name.lastIndexOf('.');
+    var base = dot>0 ? name.slice(0,dot) : name;
+    var ext = dot>0 ? name.slice(dot) : '';
+    var n = 2;
+    function tryNext(){
+      var candidateName = base+' ('+n+')'+ext;
+      return arcGet(parentPath+'/'+candidateName).then(function(ex2){
+        if(!ex2) return parentPath+'/'+candidateName;
+        n++; return tryNext();
+      });
+    }
+    return tryNext();
+  });
+}
+function b64EncodeUnicode(str){ return btoa(unescape(encodeURIComponent(str))); }
+function b64DecodeUnicode(str){ try{ return decodeURIComponent(escape(atob(str))); }catch(e){ return atob(str); } }
+function arcHumanSize(bytes){
+  if(bytes===undefined || bytes===null) return '';
+  if(bytes < 1024) return bytes+' B';
+  if(bytes < 1024*1024) return Math.round(bytes/1024)+' KB';
+  return (bytes/1024/1024).toFixed(1)+' MB';
+}
+function arcIconFor(entry){
+  if(entry.type==='folder') return '📁';
+  var mime = entry.mime || '';
+  if(mime.indexOf('image/')===0) return '🖼️';
+  if(mime.indexOf('html')!==-1) return '📄';
+  if(mime.indexOf('text/')===0) return '📝';
+  if(mime.indexOf('pdf')!==-1) return '📕';
+  if(mime.indexOf('video/')===0) return '🎬';
+  if(mime.indexOf('audio/')===0) return '🎵';
+  return '📦';
+}
+
+function initArchive(){
+  arcOpenDB().then(function(db){
+    ARC.db = db;
+    return arcEnsureRoot();
+  }).then(function(){
+    ARC.ready = true;
+    renderArchive();
+  }).catch(function(){
+    toast('Could not open evidence archive storage');
+  });
+}
+
+function renderArchive(){
+  if(!ARC.ready) return;
+  renderArcBreadcrumb();
+  arcSetSelected(null);
+  arcListChildren(ARC.path).then(function(items){
+    items.sort(function(a,b){
+      if(a.type!==b.type) return a.type==='folder' ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+    var host = document.getElementById('arcGrid');
+    if(items.length===0){
+      host.innerHTML = '<div class="emptyhint">This folder is empty. Upload a file or create a subfolder to get started.</div>';
+      return;
+    }
+    var html = '';
+    items.forEach(function(it){
+      html += '<div class="fileitem" data-path="'+it.path.replace(/"/g,'&quot;')+'" data-type="'+it.type+'">';
+      html += '  <span class="ficon">'+arcIconFor(it)+'</span>';
+      html += '  <div class="fname">'+esc(it.name)+'</div>';
+      if(it.type==='file'){ html += '<div class="fimeta">'+arcHumanSize(it.size)+'</div>'; }
+      html += '</div>';
+    });
+    host.innerHTML = html;
+    var els = host.querySelectorAll('.fileitem');
+    for(var i=0;i<els.length;i++){
+      (function(el){
+        el.addEventListener('click', function(){ arcSetSelected(el.getAttribute('data-path')); });
+        el.addEventListener('dblclick', function(){ arcOpenItem(el.getAttribute('data-path'), el.getAttribute('data-type')); });
+      })(els[i]);
+    }
+  });
+}
+function renderArcBreadcrumb(){
+  var host = document.getElementById('arcBreadcrumb');
+  var parts = ARC.path.split('/').filter(function(p){ return p!==''; });
+  var html = '';
+  var acc = '';
+  parts.forEach(function(p, i){
+    acc += '/'+p;
+    html += '<span class="crumb" data-path="'+acc.replace(/"/g,'&quot;')+'">'+esc(p)+'</span>';
+    if(i<parts.length-1) html += '<span class="sep">/</span>';
+  });
+  host.innerHTML = html;
+  var crumbs = host.querySelectorAll('.crumb');
+  for(var i=0;i<crumbs.length;i++){
+    (function(c){
+      c.addEventListener('click', function(){ ARC.path = c.getAttribute('data-path'); renderArchive(); });
+    })(crumbs[i]);
+  }
+}
+function arcSetSelected(path){
+  ARC.selected = path;
+  var els = document.querySelectorAll('#arcGrid .fileitem');
+  for(var i=0;i<els.length;i++){
+    els[i].className = 'fileitem' + (els[i].getAttribute('data-path')===path ? ' selected' : '');
+  }
+  var has = !!path;
+  document.getElementById('arcRename').disabled = !has;
+  document.getElementById('arcDelete').disabled = !has || path===ARC_ROOT;
+  document.getElementById('arcDownload').disabled = !has;
+}
+function arcOpenItem(path, type){
+  if(type==='folder'){ ARC.path = path; renderArchive(); return; }
+  arcGet(path).then(function(entry){
+    if(!entry) return;
+    arcPreview(entry);
+  });
+}
+function arcPreview(entry){
+  document.getElementById('arcPreviewTitle').textContent = entry.name;
+  var body = document.getElementById('arcPreviewBody');
+  var mime = entry.mime || '';
+  if(mime.indexOf('image/')===0){
+    body.innerHTML = '<img src="'+entry.dataUrl+'">';
+  } else if(mime.indexOf('html')!==-1){
+    body.innerHTML = '<iframe src="'+entry.dataUrl+'"></iframe>';
+  } else if(mime.indexOf('text/')===0){
+    var raw = entry.dataUrl.split(',')[1] || '';
+    body.innerHTML = '<pre>'+esc(b64DecodeUnicode(raw))+'</pre>';
+  } else {
+    body.innerHTML = '<div class="emptyhint">No preview available for this file type — use Download to view it.</div>';
+  }
+  document.getElementById('arcPreviewDownload').onclick = function(){ arcDownloadEntry(entry); };
+  document.getElementById('arcPreviewModal').className = 'modalbg show';
+}
+function arcDownloadEntry(entry){
+  var a = document.createElement('a');
+  a.href = entry.dataUrl;
+  a.download = entry.name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+/* ---- generic name-prompt modal (used for New Folder + Rename) ---- */
+var arcPromptCallback = null;
+function arcOpenPrompt(title, label, initialValue, cb){
+  document.getElementById('arcPromptTitle').textContent = title;
+  document.getElementById('arcPromptLabel').textContent = label;
+  document.getElementById('arcPromptInput').value = initialValue || '';
+  document.getElementById('arcPromptError').style.display = 'none';
+  arcPromptCallback = cb;
+  document.getElementById('arcPromptModal').className = 'modalbg show';
+  document.getElementById('arcPromptInput').focus();
+}
+
+function wireArchive(){
+  document.getElementById('arcNewFolder').addEventListener('click', function(){
+    arcOpenPrompt('New Folder', 'Folder name', '', function(name){
+      arcUniquePath(ARC.path, name).then(function(path){
+        return arcPut({path:path, name:name, parentPath:ARC.path, type:'folder', modified:new Date().toISOString()});
+      }).then(function(){ renderArchive(); toast('Folder created'); });
+    });
+  });
+  document.getElementById('arcUpload').addEventListener('click', function(){ document.getElementById('arcFileInput').click(); });
+  document.getElementById('arcFileInput').addEventListener('change', function(e){
+    var files = e.target.files;
+    var count = 0;
+    for(var i=0;i<files.length;i++){
+      (function(file){
+        var reader = new FileReader();
+        reader.onload = function(ev){
+          arcUniquePath(ARC.path, file.name).then(function(path){
+            var name = path.split('/').pop();
+            return arcPut({path:path, name:name, parentPath:ARC.path, type:'file', mime:file.type||'application/octet-stream', dataUrl:ev.target.result, size:file.size, modified:new Date().toISOString()});
+          }).then(function(){
+            count++;
+            if(count===files.length){ renderArchive(); toast(count+' file(s) uploaded'); }
+          });
+        };
+        reader.readAsDataURL(file);
+      })(files[i]);
+    }
+    e.target.value = '';
+  });
+  document.getElementById('arcNewNote').addEventListener('click', function(){
+    document.getElementById('arcNoteName').value = '';
+    document.getElementById('arcNoteBody').value = '';
+    document.getElementById('arcNoteModal').className = 'modalbg show';
+  });
+  document.getElementById('arcNoteCancel').addEventListener('click', function(){ document.getElementById('arcNoteModal').className='modalbg'; });
+  document.getElementById('arcNoteOk').addEventListener('click', function(){
+    var name = (document.getElementById('arcNoteName').value || '').trim();
+    var body = document.getElementById('arcNoteBody').value || '';
+    if(!name){ toast('Please name the file'); return; }
+    if(!/\.[a-z0-9]+$/i.test(name)) name += '.txt';
+    arcUniquePath(ARC.path, name).then(function(path){
+      var finalName = path.split('/').pop();
+      return arcPut({path:path, name:finalName, parentPath:ARC.path, type:'file', mime:'text/plain', dataUrl:'data:text/plain;base64,'+b64EncodeUnicode(body), size:body.length, modified:new Date().toISOString()});
+    }).then(function(){
+      document.getElementById('arcNoteModal').className='modalbg';
+      renderArchive();
+      toast('Note created');
+    });
+  });
+  document.getElementById('arcArchiveReport').addEventListener('click', function(){
+    var reportHtml = buildCompiled();
+    var name = document.getElementById('s_name').value || '';
+    var page = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'
+      + '<title>Submission Report — '+name.replace(/</g,'&lt;')+'</title>'
+      + '<style>'+STANDALONE_CSS+'</style></head><body>'
+      + reportHtml
+      + '<p style="text-align:center;color:#8a94a6;font-size:.75rem;margin-top:40px">Developed by Sam McGuire 2026</p>'
+      + '</body></html>';
+    var path = ARC_ROOT+'/submission.html';
+    arcPut({path:path, name:'submission.html', parentPath:ARC_ROOT, type:'file', mime:'text/html', dataUrl:'data:text/html;base64,'+b64EncodeUnicode(page), size:page.length, modified:new Date().toISOString()})
+      .then(function(){
+        ARC.path = ARC_ROOT;
+        renderArchive();
+        toast('submission.html archived');
+      });
+  });
+  document.getElementById('arcRename').addEventListener('click', function(){
+    if(!ARC.selected) return;
+    arcGet(ARC.selected).then(function(entry){
+      if(!entry) return;
+      arcOpenPrompt('Rename', 'New name', entry.name, function(newName){
+        arcRenameEntry(entry, newName);
+      });
+    });
+  });
+  document.getElementById('arcPromptCancel').addEventListener('click', function(){ document.getElementById('arcPromptModal').className='modalbg'; arcPromptCallback=null; });
+  document.getElementById('arcPromptOk').addEventListener('click', function(){
+    var val = (document.getElementById('arcPromptInput').value || '').trim();
+    if(!val){ document.getElementById('arcPromptError').style.display='block'; return; }
+    document.getElementById('arcPromptModal').className='modalbg';
+    if(arcPromptCallback) arcPromptCallback(val);
+    arcPromptCallback = null;
+  });
+  document.getElementById('arcDownload').addEventListener('click', function(){
+    if(!ARC.selected) return;
+    arcGet(ARC.selected).then(function(entry){
+      if(entry && entry.type==='file') arcDownloadEntry(entry);
+      else toast('Select a file (not a folder) to download');
+    });
+  });
+  document.getElementById('arcDownloadZip').addEventListener('click', arcDownloadZip);
+  document.getElementById('arcDelete').addEventListener('click', function(){
+    if(!ARC.selected || ARC.selected===ARC_ROOT) return;
+    document.getElementById('arcDeleteText').textContent = 'This will permanently remove "'+ARC.selected.split('/').pop()+'" (and everything inside it, if it\'s a folder).';
+    document.getElementById('arcDeleteModal').className = 'modalbg show';
+  });
+  document.getElementById('arcDeleteCancel').addEventListener('click', function(){ document.getElementById('arcDeleteModal').className='modalbg'; });
+  document.getElementById('arcDeleteConfirm').addEventListener('click', function(){
+    document.getElementById('arcDeleteModal').className='modalbg';
+    arcDeleteRecursive(ARC.selected).then(function(){ renderArchive(); toast('Deleted'); });
+  });
+  document.getElementById('arcPreviewClose').addEventListener('click', function(){ document.getElementById('arcPreviewModal').className='modalbg'; });
+}
+function arcRenameEntry(entry, newName){
+  arcUniquePath(entry.parentPath, newName).then(function(newPath){
+    var finalName = newPath.split('/').pop();
+    if(entry.type==='file'){
+      return arcDeleteOne(entry.path).then(function(){
+        entry.path = newPath; entry.name = finalName; entry.modified = new Date().toISOString();
+        return arcPut(entry);
+      });
+    }
+    /* folder rename: cascade to all descendants */
+    var oldPrefix = entry.path+'/';
+    return arcGetAll().then(function(all){
+      var descendants = all.filter(function(e){ return e.path.indexOf(oldPrefix)===0; });
+      var chain = arcDeleteOne(entry.path).then(function(){
+        entry.path = newPath; entry.name = finalName; entry.parentPath = entry.parentPath; entry.modified = new Date().toISOString();
+        return arcPut(entry);
+      });
+      descendants.forEach(function(d){
+        chain = chain.then(function(){
+          var rest = d.path.slice(oldPrefix.length);
+          var newDpath = newPath+'/'+rest;
+          var newParent = d.parentPath===entry.path ? newPath : d.parentPath.replace(oldPrefix.slice(0,-1), newPath);
+          return arcDeleteOne(d.path).then(function(){
+            d.path = newDpath; d.parentPath = newParent;
+            return arcPut(d);
+          });
+        });
+      });
+      return chain;
+    });
+  }).then(function(){
+    if(ARC.path===entry.path || ARC.path.indexOf(entry.path+'/')===0){
+      /* current folder itself was renamed; go back to root to avoid a dangling path */
+      ARC.path = ARC_ROOT;
+    }
+    renderArchive();
+    toast('Renamed');
+  });
+}
+function arcDeleteRecursive(path){
+  return arcGet(path).then(function(entry){
+    if(!entry) return;
+    if(entry.type==='folder'){
+      return arcListChildren(path).then(function(children){
+        var chain = Promise.resolve();
+        children.forEach(function(c){
+          chain = chain.then(function(){ return arcDeleteRecursive(c.path); });
+        });
+        return chain.then(function(){ return arcDeleteOne(path); });
+      });
+    }
+    return arcDeleteOne(path);
+  }).then(function(){
+    if(ARC.path===path || ARC.path.indexOf(path+'/')===0){ ARC.path = ARC_ROOT; }
+  });
+}
+
+/* ---- zip the whole archive (from ARC_ROOT down) into one .zip download ---- */
+function arcCollectForZip(path, relBase, list){
+  return arcListChildren(path).then(function(children){
+    var chain = Promise.resolve();
+    children.forEach(function(c){
+      var rel = relBase ? relBase+'/'+c.name : c.name;
+      if(c.type==='folder'){
+        chain = chain.then(function(){ return arcCollectForZip(c.path, rel, list); });
+      } else {
+        chain = chain.then(function(){
+          list.push({ name: rel, bytes: zipDataUrlToBytes(c.dataUrl), date: c.modified ? new Date(c.modified) : new Date() });
+        });
+      }
+    });
+    return chain;
+  });
+}
+function arcDownloadZip(){
+  toast('Building zip…');
+  var list = [];
+  arcCollectForZip(ARC_ROOT, '', list).then(function(){
+    if(list.length===0){ toast('Archive is empty — nothing to zip'); return; }
+    var zw = new ZipWriter();
+    list.forEach(function(item){ zw.addFile(item.name, item.bytes, item.date); });
+    var blob = zw.finalize();
+    var name = document.getElementById('s_name').value || 'submission';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'NCEA-Evidence-Archive-' + name.replace(/[^a-z0-9]+/gi,'-') + '.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    toast('Zip downloaded ('+list.length+' file'+(list.length===1?'':'s')+')');
+  });
+}
+
+init();
+</script>
+</body>
+</html>
